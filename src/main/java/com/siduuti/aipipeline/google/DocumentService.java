@@ -56,8 +56,7 @@ public class DocumentService {
 
     }
 
-    private Flux<ExtractedDocument> callAzureAndExtract(InputStream is, String mime) {
-
+    public Flux<ExtractedDocument> processDocumentWithAzure(InputStream is, String mime) {
         BinaryData docData = BinaryData.fromStream(is);
         AnalyzeDocumentOptions input = new AnalyzeDocumentOptions(docData);
         return azureDocumentClient.beginAnalyzeDocument("prebuilt-layout", input)

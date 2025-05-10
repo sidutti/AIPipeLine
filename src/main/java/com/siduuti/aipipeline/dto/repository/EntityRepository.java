@@ -8,4 +8,8 @@ public interface EntityRepository extends ReactiveMongoRepository<EntityNode, St
     Flux<EntityNode> findByDocumentId(String documentId);
 
     Flux<EntityNode> findByDomain(String domain);
+
+
+
+
 }
