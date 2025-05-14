@@ -25,8 +25,8 @@ public class EvaluatorAgent {
                 .call()
                 .entity(EvaluationResponse.class);
 
-        System.out.println(String.format("\n=== EVALUATOR OUTPUT ===\nEVALUATION: %s\n\nFEEDBACK: %s\n",
-                evaluationResponse.evaluation(), evaluationResponse.getFeedback()));
+        System.out.printf("\n=== EVALUATOR OUTPUT ===\nEVALUATION: %s\n\nFEEDBACK: %s\n%n",
+                evaluationResponse.getScore(), evaluationResponse.getFeedback());
         return evaluationResponse;
     }
 }
