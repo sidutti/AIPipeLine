@@ -8,10 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.vertexai.Transport;
 import com.google.cloud.vertexai.VertexAI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.model.vertexai.autoconfigure.gemini.VertexAiGeminiConnectionProperties;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
@@ -72,7 +76,7 @@ public class AIConfig {
 
         var vertexAIBuilder = new VertexAI.Builder().setProjectId(connectionProperties.getProjectId())
                 .setLocation(connectionProperties.getLocation())
-                .setTransport(com.google.cloud.vertexai.Transport.valueOf(connectionProperties.getTransport().name()));
+                .setTransport(Transport.valueOf(connectionProperties.getTransport().name()));
 
         if (StringUtils.hasText(connectionProperties.getApiEndpoint())) {
             vertexAIBuilder.setApiEndpoint(connectionProperties.getApiEndpoint());
@@ -91,8 +95,23 @@ public class AIConfig {
         return vertexAIBuilder.build();
     }
 
+    @Bean
+    public ChatClient azureChatClient(@Qualifier("azureOpenAiChatModel") ChatModel chatModel) {
+        return ChatClient.create(chatModel);
+    }
 
+    @Bean
+    public ChatClient vertexChatClient(@Qualifier("vertexAiGeminiChat") ChatModel chatModel) {
+        return ChatClient.create(chatModel);
+    }
 
-
+    @Bean
+    public ChatClient ollamaChatClient(@Qualifier("ollamaChatModel") ChatModel chatModel) {
+        return ChatClient.create(chatModel);
+    }
+    @Bean
+    public ChatClient openAiChatClient(@Qualifier("openAiChatModel") ChatModel chatModel) {
+        return ChatClient.create(chatModel);
+    }
 
 }

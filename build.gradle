@@ -18,22 +18,20 @@ repositories {
     mavenCentral()
 }
 
-ext {
-    set('springAiVersion', "1.0.0-M8")
-    set('springCloudGcpVersion', "6.1.1")
-    set('springCloudVersion', "2024.0.1")
-}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
-    implementation 'org.springframework.ai:spring-ai-starter-model-azure-openai'
-    implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-embedding'
     implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-gemini'
+    implementation 'org.springframework.ai:spring-ai-starter-model-azure-openai'
+    implementation 'org.springframework.ai:spring-ai-starter-model-openai'
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-elasticsearch'
+    implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
     implementation 'com.google.cloud:google-cloud-document-ai:2.63.0'
+    implementation 'com.google.cloud:google-cloud-aiplatform'
+
     implementation("com.azure:azure-ai-documentintelligence:1.0.1")
     implementation 'com.azure:azure-identity:1.15.4'
     implementation 'com.microsoft.graph:microsoft-graph:6.36.0'

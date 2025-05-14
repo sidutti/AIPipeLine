@@ -1,46 +1,41 @@
 spring:
   application:
-    name: AIPipeLine
+    name: AIAgents
   ai:
+    model:
+      embedding:
+        text: none
     vectorstore:
       elasticsearch:
         dimensions: 1536
         initialize-schema: true
         index-name: policy-ai-index
     ollama:
+      chat:
+        model: gemma2
       embedding:
         model: mxbai-embed-large
-        enabled: false
     vertex:
       ai:
-        embedding:
-          text:
-            enabled: false
         gemini:
           projectId: basicdocumentai
           location: us-central1
           credentialsUri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
     azure:
       openai:
-        embedding:
-          enabled: true
-          options:
-            deployment-name: basic-embeddings
         api-key: ${AZURE_OPENAI_KEY}
         endpoint: https://basicai.openai.azure.com/
         chat:
-          enabled: true
           options:
             deployment-name: Basic-Mini
+    chat:
+      client:
+        enabled: false
   aop:
     proxy-target-class: false
     auto: true
 
-  data:
-    mongodb:
-      uri: mongodb+srv://sidutti:1JtigZAmA4WeNOuM@sidchar.anzbaom.mongodb.net/?retryWrites=true&w=majority&appName=sidchar
-      database: sample_training
-      auto-index-creation: true
+
   elasticsearch:
     password: ElasticAdminPassword
     uris: http://192.168.1.84:30003/
@@ -54,6 +49,7 @@ cloud:
   microsoft:
     endpoint: https://basicdocintel.cognitiveservices.azure.com/
     key: ${AZURE_KEY:none}
+
   google:
     cred-path: '/mnt/nas/CodeDataset/keys/serviceaccount.json'
     project-id: basicdocumentai
