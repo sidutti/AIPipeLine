@@ -1,9 +1,9 @@
 package com.siduuti.aipipeline.dto;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
 
-@Document(collection = "prompts")
+@Document(indexName = "id")
 public record StoredPrompt(@Id String id,
                            String userPrompt,
                            String systemPrompt,

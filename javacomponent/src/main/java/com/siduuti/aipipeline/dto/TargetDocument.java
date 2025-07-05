@@ -1,48 +1,46 @@
 package com.siduuti.aipipeline.dto;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collection = "documents")
+@Document(indexName = "id")
 public class TargetDocument {
     
     @Id
     private String id;
-    
-    @Field("file_name")
+
     private String fileName;
     
-    @Field("file_path")
+
     private String filePath;
     
-    @Field("content")
+
     private String content;
     
-    @Field("file_size")
+
     private Long fileSize;
     
-    @Field("mime_type")
+
     private String mimeType;
     
-    @Field("created_at")
+
     private LocalDateTime createdAt;
     
-    @Field("updated_at")
+
     private LocalDateTime updatedAt;
     
-    @Field("processing_status")
+
     private ProcessingStatus processingStatus;
     
-    @Field("cluster_id")
+
     private String clusterId;
     
-    @Field("classification")
+
     private String classification;
     
-    @Field("confidence_score")
+
     private Double confidenceScore;
     
     public TargetDocument() {

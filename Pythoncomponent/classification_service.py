@@ -1,15 +1,15 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from typing import List, Optional
-import openai
-from elasticsearch import Elasticsearch
-import asyncio
-import uvicorn
-from datetime import datetime
 import logging
 import os
-from collections import Counter
 import re
+from collections import Counter
+from datetime import datetime
+from typing import List, Optional
+
+import openai
+import uvicorn
+from elasticsearch import Elasticsearch
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

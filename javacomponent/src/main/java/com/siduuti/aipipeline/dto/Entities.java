@@ -1,34 +1,56 @@
 package com.siduuti.aipipeline.dto;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.CompoundIndex;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.util.List;
 
-@Document("entities")
-@CompoundIndex(name = "dynamic_props_idx", def = "{'dynamic_properties.k': 1, 'dynamic_properties.v': 1}")
+/**
+ * Represents an entity document stored in Elasticsearch.
+ */
+@Document(indexName = "entities")
 public record Entities(@Id String id,
-                       @Indexed String documentId,
-                       @Indexed String chunkId,
-                       String sku,
-                       @Field("dynamic_properties")
-                                   List<PropertyEntry> dynamicProperties) {
 
+                       @Field(type = FieldType.Keyword)
+                       String documentId,
+
+                       @Field(type = FieldType.Keyword)
+                       String chunkId,
+
+                       @Field(type = FieldType.Keyword)
+                       String sku,
+
+                       // Mapped as a Nested object to allow querying on k and v pairs independently.
+                       // This is the Elasticsearch equivalent of the MongoDB compound index.
+                       @Field(type = FieldType.Nested, includeInParent = true)
+                       List<PropertyEntry> dynamicProperties) {
+
+    // The default record toString() is often sufficient, but this is customized for clarity.
     @Override
     public String toString() {
-        return "ProductWithProperties{" +
+        return "Entities{" +
                 "id='" + id + '\'' +
+                ", documentId='" + documentId + '\'' +
+                ", chunkId='" + chunkId + '\'' +
                 ", sku='" + sku + '\'' +
                 ", dynamicProperties=" + dynamicProperties +
                 '}';
     }
 }
 
-// Represents a single key-value pair
-record PropertyEntry(String k, String v) {
+/**
+ * Represents a single key-value pair within the nested dynamicProperties field.
+ * The fields are mapped here to define how they are indexed.
+ */
+record PropertyEntry(
+        // 'k' (key) is a keyword for exact matching, filtering, and aggregations.
+        @Field(type = FieldType.Keyword)
+        String k,
 
+        // 'v' (value) is text to allow for full-text search.
+        @Field(type = FieldType.Text)
+        String v
+) {
 }
-

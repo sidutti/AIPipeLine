@@ -1,11 +1,11 @@
 package com.siduuti.aipipeline.dto;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Map;
 
-@Document(collection = "entities")
+@Document(indexName = "id")
 public record EntityNode(@Id
                          String id,
                          String documentId,
