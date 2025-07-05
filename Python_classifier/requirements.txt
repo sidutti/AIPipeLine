@@ -1,0 +1,10 @@
+numpy~=2.3.1
+uvicorn~=0.35.0
+fastapi~=0.115.14
+pydantic~=2.11.7
+elasticsearch~=9.0.2
+openai~=1.93.0
+StandardScaler
+pandas~=2.3.0
+scikit-learn~=1.7.0
+joblib~=1.5.1
