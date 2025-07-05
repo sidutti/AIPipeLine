@@ -11,7 +11,6 @@ import com.google.cloud.documentai.v1.DocumentProcessorServiceClient;
 import com.google.cloud.documentai.v1.ProcessRequest;
 import com.google.cloud.documentai.v1.RawDocument;
 import com.google.protobuf.ByteString;
-
 import com.siduuti.aipipeline.dto.ExtractedDocument;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

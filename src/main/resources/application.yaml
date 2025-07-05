@@ -4,7 +4,7 @@ spring:
   ai:
     model:
       embedding:
-        text: none
+        text: ollama
     vectorstore:
       elasticsearch:
         dimensions: 1536
@@ -12,7 +12,7 @@ spring:
         index-name: policy-ai-index
     ollama:
       chat:
-        model: gemma2
+        model: gemma3
       embedding:
         model: mxbai-embed-large
     vertex:
@@ -23,28 +23,39 @@ spring:
           credentialsUri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
     azure:
       openai:
-        api-key: ${AZURE_OPENAI_KEY}
+        api-key: ${AZURE_OPENAI_KEY:NONE}
         endpoint: https://basicai.openai.azure.com/
         chat:
           options:
             deployment-name: Basic-Mini
+
     chat:
       client:
         enabled: false
   aop:
     proxy-target-class: false
     auto: true
-
-
   elasticsearch:
-    password: ElasticAdminPassword
+    password: Admin
     uris: http://192.168.1.84:30003/
     username: elastic
-  codec:
-    max-in-memory-size: 2GB
+  http:
+    codecs:
+      max-in-memory-size: 2GB
   threads:
     virtual:
       enabled: true
+  data:
+    mongodb:
+      host: 192.168.1.84
+      username: mongo
+      password: Admin
+      port: 27017
+
+    elasticsearch:
+      repositories:
+        enabled: true
+
 cloud:
   microsoft:
     endpoint: https://basicdocintel.cognitiveservices.azure.com/
@@ -57,3 +68,12 @@ cloud:
     layout-processer-id: 5b561e1fd378c67a
     bucket: doaibucket
 
+python:
+  service:
+    base-url: http://localhost:8001
+    clustering-endpoint: /cluster
+    classification-endpoint: http://localhost:8002
+
+document:
+  repository:
+    base-path: "/mnt/nas/CodeDataset/pdfs"

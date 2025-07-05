@@ -3,7 +3,10 @@ package com.siduuti.aipipeline.service.agents;
 import com.siduuti.aipipeline.dto.StoredPrompt;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.evaluation.EvaluationResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @Component
 public class EvaluatorAgent {
@@ -11,7 +14,7 @@ public class EvaluatorAgent {
 
     private final ChatClient openAiChatClient;
 
-    public EvaluatorAgent(ChatClient openAiChatClient) {
+    public EvaluatorAgent(@Qualifier("ollamaChatClient") ChatClient openAiChatClient) {
         this.openAiChatClient = openAiChatClient;
     }
 
@@ -24,7 +27,7 @@ public class EvaluatorAgent {
                         .param("content", content))
                 .call()
                 .entity(EvaluationResponse.class);
-
+        Mono.just("as").subscribeOn(Schedulers.boundedElastic()).block();
         System.out.printf("\n=== EVALUATOR OUTPUT ===\nEVALUATION: %s\n\nFEEDBACK: %s\n%n",
                 evaluationResponse.getScore(), evaluationResponse.getFeedback());
         return evaluationResponse;

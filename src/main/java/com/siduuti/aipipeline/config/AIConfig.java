@@ -22,9 +22,10 @@ import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
-import org.springframework.web.client.RestClient;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.scheduler.Scheduler;
 import reactor.netty.http.client.HttpClient;
+import reactor.scheduler.forkjoin.ForkJoinPoolScheduler;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,7 +35,10 @@ public class AIConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AIConfig.class);
 
-
+    @Bean("forkJoinScheduler")
+    public Scheduler forkJoinScheduler(){
+        return ForkJoinPoolScheduler.create("distributor");
+    }
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
@@ -47,10 +51,6 @@ public class AIConfig {
                 .build();
     }
 
-    @Bean
-    public RestClient.Builder ollamaRestClientBuilder() {
-        return RestClient.builder();
-    }
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -95,10 +95,7 @@ public class AIConfig {
         return vertexAIBuilder.build();
     }
 
-    @Bean
-    public ChatClient azureChatClient(@Qualifier("azureOpenAiChatModel") ChatModel chatModel) {
-        return ChatClient.create(chatModel);
-    }
+
 
     @Bean
     public ChatClient vertexChatClient(@Qualifier("vertexAiGeminiChat") ChatModel chatModel) {
@@ -109,9 +106,6 @@ public class AIConfig {
     public ChatClient ollamaChatClient(@Qualifier("ollamaChatModel") ChatModel chatModel) {
         return ChatClient.create(chatModel);
     }
-    @Bean
-    public ChatClient openAiChatClient(@Qualifier("openAiChatModel") ChatModel chatModel) {
-        return ChatClient.create(chatModel);
-    }
+
 
 }
