@@ -6,7 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Map;
 
-@Document(indexName = "id")
+@Document(indexName = "relationship")
 public record Relationship(@Id String id,
                            String type,
                            String from,

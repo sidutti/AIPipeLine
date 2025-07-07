@@ -24,7 +24,12 @@ public class DocumentProcessingController {
     public Mono<String> processDocuments() {
         return processingService.processAllDocuments();
     }
-    
+
+    @PostMapping("/cluster")
+    public Flux<String> clusterDocuments() {
+        return processingService.performClustering();
+    }
+
     @GetMapping("/status")
     public Mono<DocumentProcessingService.ProcessingStatus> getProcessingStatus() {
         return processingService.getProcessingStatus();

@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Service
 public class EmbeddingService {
 
@@ -32,7 +30,6 @@ public class EmbeddingService {
 
         String textContent = preprocessText(document.getContent());
         float[] embedding = embeddingModel.embed(textContent);
-
         DocumentEmbedding docEmbedding = new DocumentEmbedding();
         docEmbedding.setDocumentId(document.getId());
         docEmbedding.setEmbedding(embedding);
@@ -42,8 +39,9 @@ public class EmbeddingService {
     }
 
 
-    public Mono<List<DocumentEmbedding>> getAllEmbeddings() {
-        return embeddingRepository.findAll().collectList();
+    public Flux<Flux<DocumentEmbedding>> getAllEmbeddings() {
+        return embeddingRepository.findAll()
+                .window(1000);
     }
 
     public Flux<DocumentEmbedding> getEmbeddingsByCluster(String clusterId) {
@@ -56,9 +54,6 @@ public class EmbeddingService {
         text = text.replaceAll("\\s+", " ");
         text = text.replaceAll("[^\\w\\s]", "");
 
-        if (text.length() > 8000) {
-            text = text.substring(0, 8000);
-        }
 
         return text.trim();
     }

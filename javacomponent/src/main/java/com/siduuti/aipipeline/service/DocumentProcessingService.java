@@ -37,7 +37,7 @@ public class DocumentProcessingService {
     public Mono<String> processAllDocuments() {
         ingestionService.ingestDocumentsFromRepository()
                 .flatMap(embeddingService::generateEmbedding)
-                .map(this::updateStatus)
+                .flatMap(this::updateStatus)
                 .subscribeOn(forkJoinScheduler)
                 .subscribe();
         return Mono.just("All documents processed");
@@ -53,16 +53,10 @@ public class DocumentProcessingService {
     }
 
 
-    private Mono<String> performClustering() {
+    public Flux<String> performClustering() {
         return embeddingService.getAllEmbeddings()
-                .flatMap(embeddings -> {
-                    if (embeddings.isEmpty()) {
-                        return Mono.just("No embeddings available for clustering");
-                    }
-
-                    return pythonServiceClient.performClustering(embeddings, null)
-                            .map(response -> "Clustering completed with " + response.getNumClusters() + " clusters");
-                });
+                .flatMap(embeddings -> pythonServiceClient.performClustering(embeddings, null)
+                        .map(response -> "Clustering completed with " + response.getNumClusters() + " clusters"));
     }
 
     private Mono<String> performClassification() {

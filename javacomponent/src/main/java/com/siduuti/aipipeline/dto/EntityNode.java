@@ -5,7 +5,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Map;
 
-@Document(indexName = "id")
+@Document(indexName = "entity")
 public record EntityNode(@Id
                          String id,
                          String documentId,

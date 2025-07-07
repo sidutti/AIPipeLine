@@ -4,6 +4,7 @@ import com.siduuti.aipipeline.dto.DocumentEmbedding;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -25,19 +26,24 @@ public class PythonServiceClient {
         this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
-    public Mono<ClusteringResponse> performClustering(List<DocumentEmbedding> embeddings, Integer numClusters) {
-        ClusteringRequest request = new ClusteringRequest();
-        request.setEmbeddings(embeddings.stream()
-                .map(this::mapToEmbeddingData)
-                .toList());
-        request.setNumClusters(numClusters);
-        request.setAlgorithm("kmeans");
+    public Mono<ClusteringResponse> performClustering(Flux<DocumentEmbedding> embeddings, Integer numClusters) {
 
-        return webClient.post()
-                .uri(clusteringEndpoint)
-                .bodyValue(request)
-                .retrieve()
-                .bodyToMono(ClusteringResponse.class);
+        return embeddings
+                .map(this::mapToEmbeddingData)
+                .collectList()
+                .map(e -> {
+                    ClusteringRequest request = new ClusteringRequest();
+                    request.setNumClusters(numClusters);
+                    request.setAlgorithm("kmeans");
+                    request.setInputPath("/mnt/nas/CodeDataset/model/cluster_model");
+                    request.setEmbeddings(e);
+                    return request;
+                })
+                .flatMap(xr -> webClient.post()
+                        .uri(clusteringEndpoint)
+                        .bodyValue(xr)
+                        .retrieve()
+                        .bodyToMono(ClusteringResponse.class));
     }
 
     public Mono<ClassificationResponse> performClassification(String clusterId, List<String> documentContents) {
@@ -111,6 +117,8 @@ public class PythonServiceClient {
         private List<EmbeddingData> embeddings;
         private Integer numClusters;
         private String algorithm;
+        private Integer batchSize=1000;
+        private String inputPath;
 
         public List<EmbeddingData> getEmbeddings() {
             return embeddings;
@@ -134,6 +142,18 @@ public class PythonServiceClient {
 
         public void setAlgorithm(String algorithm) {
             this.algorithm = algorithm;
+        }
+
+        public String getInputPath() {
+            return inputPath;
+        }
+
+        public void setInputPath(String inputPath) {
+            this.inputPath = inputPath;
+        }
+
+        public Integer getBatchSize() {
+            return batchSize;
         }
     }
 

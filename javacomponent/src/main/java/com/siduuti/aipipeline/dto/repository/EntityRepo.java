@@ -7,7 +7,6 @@ import reactor.core.publisher.Flux;
 public interface EntityRepo extends ReactiveElasticsearchRepository<Entities, String> {
 
 
-    Flux<Entities> findByDynamicProperty(String key, String value);
     Flux<Entities> findByDocumentId(String documentId);
     Flux<Entities> findBySku(String sku);
     Flux<Entities> findByChunkId(String chunkId);

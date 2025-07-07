@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.model.vertexai.autoconfigure.gemini.VertexAiGeminiConnectionProperties;
+import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,9 +37,10 @@ public class AIConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(AIConfig.class);
 
     @Bean("forkJoinScheduler")
-    public Scheduler forkJoinScheduler(){
+    public Scheduler forkJoinScheduler() {
         return ForkJoinPoolScheduler.create("distributor");
     }
+
     @Bean
     public WebClient webClient() {
         return WebClient.builder()
@@ -51,6 +53,15 @@ public class AIConfig {
                 .build();
     }
 
+    @Bean
+    public TokenTextSplitter tokenTextSplitter() {
+        return
+                TokenTextSplitter.builder()
+                        .withChunkSize(512) // The target token size for each chunk
+                        .withKeepSeparator(false)
+                        .build();
+
+    }
 
     @Bean
     public ObjectMapper objectMapper() {
@@ -95,7 +106,43 @@ public class AIConfig {
         return vertexAIBuilder.build();
     }
 
-
+//    @Bean
+//    public VertexAiEmbeddingConnectionDetails connectionDetails(CredentialsProvider credentialsProvider,
+//                                                                VertexAiEmbeddingConnectionProperties connectionProperties) throws IOException {
+//        PredictionServiceSettings.Builder predictionServiceSettingsBuilder =
+//                PredictionServiceSettings.newBuilder();
+//        predictionServiceSettingsBuilder
+//                .setCredentialsProvider(credentialsProvider)
+//                .predictSettings()
+//                .setRetrySettings(
+//                        predictionServiceSettingsBuilder
+//                                .predictSettings()
+//                                .getRetrySettings()
+//                                .toBuilder()
+//                                .setInitialRetryDelayDuration(Duration.ofSeconds(1))
+//                                .setInitialRpcTimeoutDuration(Duration.ofSeconds(5))
+//                                .setMaxAttempts(5)
+//                                .setMaxRetryDelayDuration(Duration.ofSeconds(30))
+//                                .setMaxRpcTimeoutDuration(Duration.ofSeconds(60))
+//                                .setRetryDelayMultiplier(1.3)
+//                                .setRpcTimeoutMultiplier(1.5)
+//                                .setTotalTimeoutDuration(Duration.ofSeconds(300))
+//                                .build());
+//        PredictionServiceSettings predictionServiceSettings = predictionServiceSettingsBuilder.build();
+//       return  new VertexAiEmbeddingConnectionDetails(connectionProperties.getProjectId(),
+//                connectionProperties.getLocation(),
+//                "google",
+//                predictionServiceSettings);
+//    }
+//
+//    @Bean
+//    public CredentialsProvider googleCredentials(VertexAiEmbeddingConnectionProperties connectionProperties) throws IOException {
+//        GoogleCredentials credentials =
+//                GoogleCredentials
+//                .fromStream(connectionProperties.getCredentialsUri().getInputStream())
+//                .createScoped(List.of("https://www.googleapis.com/auth/cloud-platform"));
+//        return FixedCredentialsProvider.create(credentials);
+//    }
 
     @Bean
     public ChatClient vertexChatClient(@Qualifier("vertexAiGeminiChat") ChatModel chatModel) {

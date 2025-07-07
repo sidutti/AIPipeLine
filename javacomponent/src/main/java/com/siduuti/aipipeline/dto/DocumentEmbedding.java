@@ -5,8 +5,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDateTime;
-
 @Document(indexName = "document_embeddings")
 public class DocumentEmbedding {
     
@@ -16,7 +14,7 @@ public class DocumentEmbedding {
     @Field(type = FieldType.Keyword)
     private String documentId;
     
-    @Field(type = FieldType.Dense_Vector, dims = 1536)
+    @Field(type = FieldType.Dense_Vector, dims = 1024)
     private float[] embedding;
     
     @Field(type = FieldType.Text)
@@ -25,14 +23,13 @@ public class DocumentEmbedding {
     @Field(type = FieldType.Keyword)
     private String fileName;
     
-    @Field(type = FieldType.Date)
-    private LocalDateTime createdAt;
+
     
     @Field(type = FieldType.Keyword)
     private String clusterId;
     
     public DocumentEmbedding() {
-        this.createdAt = LocalDateTime.now();
+
     }
     
     public String getId() { return id; }
@@ -49,9 +46,6 @@ public class DocumentEmbedding {
     
     public String getFileName() { return fileName; }
     public void setFileName(String fileName) { this.fileName = fileName; }
-    
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     
     public String getClusterId() { return clusterId; }
     public void setClusterId(String clusterId) { this.clusterId = clusterId; }

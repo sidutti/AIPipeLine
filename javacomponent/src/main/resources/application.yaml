@@ -3,11 +3,10 @@ spring:
     name: AIAgents
   ai:
     model:
-      embedding:
-        text: ollama
+      embedding: ollama
     vectorstore:
       elasticsearch:
-        dimensions: 1536
+        dimensions: 1024
         initialize-schema: true
         index-name: policy-ai-index
     ollama:
@@ -21,13 +20,22 @@ spring:
           projectId: basicdocumentai
           location: us-central1
           credentialsUri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
-    azure:
-      openai:
-        api-key: ${AZURE_OPENAI_KEY:NONE}
-        endpoint: https://basicai.openai.azure.com/
-        chat:
-          options:
-            deployment-name: Basic-Mini
+#        embedding:
+#          text:
+#            options.model: text-embedding-005
+#            options.task-type: CLUSTERING
+#            options.dimensions: 768
+#          project-id: basicdocumentai
+#          location: us-central1
+#          credentials-uri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
+
+    #    azure:
+#      openai:
+#        api-key: ${AZURE_OPENAI_KEY:NONE}
+#        endpoint: https://basicai.openai.azure.com/
+#        chat:
+#          options:
+#            deployment-name: Basic-Mini
 
     chat:
       client:
@@ -46,11 +54,11 @@ spring:
     virtual:
       enabled: true
   data:
-    mongodb:
-      host: 192.168.1.84
-      username: mongo
-      password: Admin
-      port: 27017
+#    mongodb:
+#      host: 192.168.1.84
+#      username: mongo
+#      password: Admin
+#      port: 27017
 
     elasticsearch:
       repositories:
@@ -76,4 +84,4 @@ python:
 
 document:
   repository:
-    base-path: "/mnt/nas/CodeDataset/pdfs"
+    base-path: "/mnt/nas/CodeDataset/test"

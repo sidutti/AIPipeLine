@@ -2,18 +2,18 @@ package com.siduuti.aipipeline.dto;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-import java.time.LocalDateTime;
-
-@Document(indexName = "id")
+@Document(indexName = "target_document")
 public class TargetDocument {
     
     @Id
     private String id;
-
+    @Field(type = FieldType.Keyword)
     private String fileName;
-    
 
+    @Field(type = FieldType.Keyword)
     private String filePath;
     
 
@@ -24,28 +24,20 @@ public class TargetDocument {
     
 
     private String mimeType;
-    
-
-    private LocalDateTime createdAt;
-    
-
-    private LocalDateTime updatedAt;
-    
-
+    @Field(type = FieldType.Keyword)
     private ProcessingStatus processingStatus;
-    
 
+    @Field(type = FieldType.Keyword)
     private String clusterId;
-    
 
+    @Field(type = FieldType.Keyword)
     private String classification;
-    
 
+    @Field(type = FieldType.Keyword)
     private Double confidenceScore;
     
     public TargetDocument() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+
         this.processingStatus = ProcessingStatus.PENDING;
     }
     
@@ -66,14 +58,7 @@ public class TargetDocument {
     
     public String getMimeType() { return mimeType; }
     public void setMimeType(String mimeType) { this.mimeType = mimeType; }
-    
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
-    
-    public LocalDateTime getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
-    
-    public ProcessingStatus getProcessingStatus() { return processingStatus; }
+
     public void setProcessingStatus(ProcessingStatus processingStatus) { this.processingStatus = processingStatus; }
     
     public String getClusterId() { return clusterId; }

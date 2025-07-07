@@ -28,6 +28,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-gemini'
+    //implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-embedding'
     implementation 'org.springframework.ai:spring-ai-client-chat'
     implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-elasticsearch'
