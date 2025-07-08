@@ -26,7 +26,7 @@ public class DocumentProcessingController {
     }
 
     @PostMapping("/cluster")
-    public Flux<String> clusterDocuments() {
+    public Mono<String> clusterDocuments() {
         return processingService.performClustering();
     }
 

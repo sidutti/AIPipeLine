@@ -2,13 +2,16 @@ package com.siduuti.aipipeline.service;
 
 import com.siduuti.aipipeline.dto.DocumentEmbedding;
 import com.siduuti.aipipeline.dto.TargetDocument;
+import com.siduuti.aipipeline.dto.TextAndDoc;
 import com.siduuti.aipipeline.dto.repository.DocumentEmbeddingRepository;
 import com.siduuti.aipipeline.dto.repository.DocumentRepository;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Scheduler;
 
 @Service
 public class EmbeddingService {
@@ -16,32 +19,43 @@ public class EmbeddingService {
     private final DocumentRepository documentRepository;
     private final DocumentEmbeddingRepository embeddingRepository;
     private final EmbeddingModel embeddingModel;
+    private final Scheduler forkJoinScheduler;
 
 
     public EmbeddingService(DocumentRepository documentRepository,
                             DocumentEmbeddingRepository embeddingRepository,
-                            @Qualifier("ollamaEmbeddingModel") EmbeddingModel embeddingModel) {
+                            @Qualifier("ollamaEmbeddingModel") EmbeddingModel embeddingModel,
+                            Scheduler forkJoinScheduler) {
         this.documentRepository = documentRepository;
         this.embeddingRepository = embeddingRepository;
         this.embeddingModel = embeddingModel;
+        this.forkJoinScheduler = forkJoinScheduler;
     }
 
-    public Mono<DocumentEmbedding> generateEmbedding(TargetDocument document) {
-
-        String textContent = preprocessText(document.getContent());
-        float[] embedding = embeddingModel.embed(textContent);
-        DocumentEmbedding docEmbedding = new DocumentEmbedding();
-        docEmbedding.setDocumentId(document.getId());
-        docEmbedding.setEmbedding(embedding);
-        docEmbedding.setTextContent(textContent);
-        docEmbedding.setFileName(document.getFileName());
-        return embeddingRepository.save(docEmbedding);
+    public Flux<DocumentEmbedding> generateEmbedding(TextAndDoc input) {
+        return  Flux.fromIterable(input.docs())
+                .publishOn(forkJoinScheduler)
+                .map(d->{
+                    String textContent = preprocessText(d.getText());
+                    float[] embedding = embeddingModel.embed(textContent);
+                    DocumentEmbedding docEmbedding = new DocumentEmbedding();
+                    docEmbedding.setDocumentId(input.doc().getId());
+                    docEmbedding.setEmbedding(embedding);
+                    docEmbedding.setTextContent(textContent);
+                    docEmbedding.setFileName(input.doc().getFileName());
+                    return docEmbedding;
+                })
+                .flatMap(embeddingRepository::save);
     }
 
 
-    public Flux<Flux<DocumentEmbedding>> getAllEmbeddings() {
-        return embeddingRepository.findAll()
-                .window(1000);
+    public Mono<Flux<DocumentEmbedding>> getAllEmbeddings() {
+
+        return documentRepository.findAllByProcessingStatus(TargetDocument.ProcessingStatus.PROCESSING)
+                .take(100)
+                .map(TargetDocument::getId)
+                .collectList()
+                .map(embeddingRepository::findAllByDocumentIdIn);
     }
 
     public Flux<DocumentEmbedding> getEmbeddingsByCluster(String clusterId) {
@@ -58,13 +72,5 @@ public class EmbeddingService {
         return text.trim();
     }
 
-    private void updateDocumentStatus(String documentId, TargetDocument.ProcessingStatus status) {
-        documentRepository.findById(documentId)
-                .map(doc -> {
-                    doc.setProcessingStatus(status);
-                    return doc;
-                })
-                .flatMap(documentRepository::save)
-                .subscribe();
-    }
+
 }

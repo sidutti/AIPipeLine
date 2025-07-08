@@ -15,13 +15,10 @@ public class TargetDocument {
 
     @Field(type = FieldType.Keyword)
     private String filePath;
-    
 
     private String content;
-    
 
     private Long fileSize;
-    
 
     private String mimeType;
     @Field(type = FieldType.Keyword)

@@ -2,20 +2,42 @@ import logging
 import os
 from datetime import datetime
 from typing import List, Optional
+import json
 
 import joblib
 import numpy as np
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from pydantic import BaseModel
 from sklearn.cluster import MiniBatchKMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
+from fastapi.responses import JSONResponse
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Document Clustering Service", version="1.0.0")
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    """
+    Custom exception handler for Pydantic validation errors.
+    This will log the detailed error, which is crucial for debugging 422s.
+    """
+    # The exc.errors() method provides a list of dictionaries with error details
+    error_details = exc.errors()
+    logger.error("=" * 50)
+    logger.error("!!! Pydantic Validation Error !!!")
+    logger.error(f"Validation error for request to: {request.url}")
+    # Pretty-print the detailed validation errors to the console
+    logger.error(json.dumps(error_details, indent=2))
+    logger.error("=" * 50)
+
+    return JSONResponse(
+        status_code=422,
+        content={"detail": "Unprocessable Entity. Check service logs for validation details.", "errors": error_details},
+    )
 
 
 class EmbeddingData(BaseModel):
@@ -39,7 +61,7 @@ class ClusteringResponse(BaseModel):
     num_clusters: int
     algorithm: str
     processing_time: float
-    cluster_centers: Optional[List[List[float]]] = None
+    #cluster_centers: Optional[List[List[float]]] = None
 
 
 class ClusteringService:
@@ -155,9 +177,9 @@ async def cluster_documents(request: ClusteringRequest):
             num_clusters = request.num_clusters
 
         # Convert cluster centers if provided
-        cluster_centers = None
-        if request.cluster_centers:
-            cluster_centers = np.array(request.cluster_centers)
+        #cluster_centers = None
+        #if request.cluster_centers:
+        #    cluster_centers = np.array(request.cluster_centers)
 
         # Perform clustering
         cluster_labels, silhouette_avg, clusterer = clustering_service.perform_clustering(
@@ -168,12 +190,8 @@ async def cluster_documents(request: ClusteringRequest):
         clusters = []
         for cluster_id in range(num_clusters):
             cluster_docs = [
-                {
-                    "document_id": request.embeddings[i].document_id,
-                    "file_name": request.embeddings[i].file_name,
-                    "text_preview": request.embeddings[i].text_content[:200] + "..." if len(
-                        request.embeddings[i].text_content) > 200 else request.embeddings[i].text_content
-                }
+                request.embeddings[i].document_id
+
                 for i, label in enumerate(cluster_labels) if label == cluster_id
             ]
 
@@ -195,8 +213,8 @@ async def cluster_documents(request: ClusteringRequest):
         )
 
         # Add cluster centers to response for future partial fits
-        if hasattr(clusterer, 'cluster_centers_'):
-            response.cluster_centers = clusterer.cluster_centers_.tolist()
+        #if hasattr(clusterer, 'cluster_centers_'):
+        #    response.cluster_centers = clusterer.cluster_centers_.tolist()
 
         return response
 

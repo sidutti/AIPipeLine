@@ -53,10 +53,17 @@ public class DocumentProcessingService {
     }
 
 
-    public Flux<String> performClustering() {
+    public Mono<String> performClustering() {
         return embeddingService.getAllEmbeddings()
                 .flatMap(embeddings -> pythonServiceClient.performClustering(embeddings, null)
-                        .map(response -> "Clustering completed with " + response.getNumClusters() + " clusters"));
+                        .map(response -> updateDocumentClusters(response)));
+    }
+
+    private String updateDocumentClusters(PythonServiceClient.ClusteringResponse response) {
+
+        documentRepository.findById("response.clusters()");
+        response.clusters().forEach(System.out::println);
+        return null;
     }
 
     private Mono<String> performClassification() {
@@ -83,8 +90,8 @@ public class DocumentProcessingService {
                                                      PythonServiceClient.ClassificationResponse response) {
         return documentRepository.findByClusterId(clusterId)
                 .flatMap(document -> {
-                    document.setClassification(response.getClassification());
-                    document.setConfidenceScore(response.getConfidence());
+                    document.setClassification(response.classification());
+                    document.setConfidenceScore(response.confidence());
                     document.setProcessingStatus(TargetDocument.ProcessingStatus.CLASSIFIED);
                     return documentRepository.save(document);
                 })
