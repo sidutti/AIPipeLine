@@ -18,5 +18,5 @@ public interface DocumentRepository extends ReactiveElasticsearchRepository<Targ
 
     Mono<Long> countByProcessingStatus(TargetDocument.ProcessingStatus status);
 
-    Flux<TargetDocument> findAllByProcessingStatus(TargetDocument.ProcessingStatus processingStatus);
+    Flux<TargetDocument> findTop500ByProcessingStatus(TargetDocument.ProcessingStatus processingStatus);
 }

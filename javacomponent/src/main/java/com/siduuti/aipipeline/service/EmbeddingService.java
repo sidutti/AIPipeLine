@@ -51,8 +51,7 @@ public class EmbeddingService {
 
     public Mono<Flux<DocumentEmbedding>> getAllEmbeddings() {
 
-        return documentRepository.findAllByProcessingStatus(TargetDocument.ProcessingStatus.PROCESSING)
-                .take(100)
+        return documentRepository.findTop500ByProcessingStatus(TargetDocument.ProcessingStatus.PROCESSING)
                 .map(TargetDocument::getId)
                 .collectList()
                 .map(embeddingRepository::findAllByDocumentIdIn);

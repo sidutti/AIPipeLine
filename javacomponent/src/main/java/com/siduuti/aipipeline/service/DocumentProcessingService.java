@@ -10,6 +10,7 @@ import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Scheduler;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class DocumentProcessingService {
@@ -53,17 +54,28 @@ public class DocumentProcessingService {
     }
 
 
-    public Mono<String> performClustering() {
+    public Flux<TargetDocument> performClustering() {
         return embeddingService.getAllEmbeddings()
-                .flatMap(embeddings -> pythonServiceClient.performClustering(embeddings, null)
-                        .map(response -> updateDocumentClusters(response)));
+                .flatMap(embeddings -> pythonServiceClient.performClustering(embeddings, null))
+                .map(PythonServiceClient.ClusteringResponse::clusters)
+                .flatMapMany(Flux::fromIterable)
+                .flatMap(this::processEntries);
     }
 
-    private String updateDocumentClusters(PythonServiceClient.ClusteringResponse response) {
 
-        documentRepository.findById("response.clusters()");
-        response.clusters().forEach(System.out::println);
-        return null;
+    private Flux<TargetDocument> processEntries(Map<String, Object> clusterEntry) {
+        String clusterName = clusterEntry.get("cluster_id").toString();
+        List<String> docIds = (List<String>) clusterEntry.get("documents");
+        if(docIds.isEmpty()){
+            return Flux.empty();
+        }
+        return documentRepository.findAllById(docIds)
+                .map(td -> {
+                    td.setClusterId(clusterName);
+                    td.setProcessingStatus(TargetDocument.ProcessingStatus.CLUSTERED);
+                    return td;
+                })
+                .flatMap(documentRepository::save);
     }
 
     private Mono<String> performClassification() {

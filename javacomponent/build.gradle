@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(24)
     }
 }
 
@@ -47,6 +47,15 @@ dependencies {
     implementation 'com.vladsch.flexmark:flexmark-html2md-converter:0.64.8'
     implementation 'com.vladsch.flexmark:flexmark:0.64.8'
     implementation("io.projectreactor.addons:reactor-extra")
+    
+    // Atlassian Confluence dependencies
+
+    implementation("com.atlassian.confluence:confluence-rest-v2-api:10.0.0-m85")
+    //implementation 'com.atlassian.confluence:confluence-rest-api:8.5.9'
+    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
