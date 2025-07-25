@@ -56,7 +56,10 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-
+    
+    // AWS SDK dependencies
+    implementation 'software.amazon.awssdk:s3:2.29.39'
+    implementation 'software.amazon.awssdk:auth:2.29.39'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'

@@ -76,6 +76,13 @@ cloud:
     layout-processer-id: 5b561e1fd378c67a
     bucket: doaibucket
 
+aws:
+  access-key: ${AWS_ACCESS_KEY:your-access-key}
+  secret-key: ${AWS_SECRET_KEY:your-secret-key}
+  region: ${AWS_REGION:us-east-1}
+  s3:
+    bucket-name: ${AWS_S3_BUCKET:your-bucket-name}
+
 python:
   service:
     base-url: http://localhost:8001
