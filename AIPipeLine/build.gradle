@@ -22,8 +22,8 @@ dependencies {
     implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
     implementation(platform("org.springframework.ai:spring-ai-bom:${springAiVersion}"))
     implementation(platform("com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"))
-    implementation(enforcedPlatform('co.elastic.clients:elasticsearch-java:8.15.5'))
-    implementation('co.elastic.clients:elasticsearch-java:8.15.5')
+    implementation(enforcedPlatform('co.elastic.clients:elasticsearch-java:latest.release'))
+    implementation('co.elastic.clients:elasticsearch-java:latest.release')
 
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -36,30 +36,16 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
     implementation("org.springframework.ai:spring-ai-tika-document-reader")
     implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
-    implementation 'com.google.cloud:google-cloud-document-ai:2.63.0'
+    implementation 'com.google.cloud:google-cloud-document-ai:latest.release'
     implementation 'com.google.cloud:google-cloud-aiplatform'
-    implementation 'com.google.adk:google-adk:0.1.0'
-    implementation("com.azure:azure-ai-documentintelligence:1.0.1")
-    implementation 'com.azure:azure-identity:1.15.4'
-    implementation 'com.microsoft.graph:microsoft-graph:6.36.0'
-    implementation 'com.microsoft.graph:microsoft-graph-core:3.6.1'
-    implementation 'org.apache.commons:commons-text:1.12.0'
-    implementation 'com.vladsch.flexmark:flexmark-html2md-converter:0.64.8'
-    implementation 'com.vladsch.flexmark:flexmark:0.64.8'
+    implementation 'com.google.adk:google-adk:latest.release'
+    implementation("com.azure:azure-ai-documentintelligence:latest.release")
+    implementation 'com.azure:azure-identity:latest.release'
+
+    implementation 'com.vladsch.flexmark:flexmark-html2md-converter:latest.release'
+    implementation 'com.vladsch.flexmark:flexmark:latest.release'
     implementation("io.projectreactor.addons:reactor-extra")
     
-    // Atlassian Confluence dependencies
-
-    implementation("com.atlassian.confluence:confluence-rest-v2-api:10.0.0-m85")
-    //implementation 'com.atlassian.confluence:confluence-rest-api:8.5.9'
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.6'
-    implementation 'io.jsonwebtoken:jjwt-impl:0.12.6'
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.6'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    
-    // AWS SDK dependencies
-    implementation 'software.amazon.awssdk:s3:2.29.39'
-    implementation 'software.amazon.awssdk:auth:2.29.39'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
