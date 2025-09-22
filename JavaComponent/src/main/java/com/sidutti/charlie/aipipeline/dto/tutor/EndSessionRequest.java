@@ -1,0 +1,8 @@
+package com.siduuti.charlie.aipipeline.dto.tutor;
+
+public class EndSessionRequest {
+    private String sessionId;
+
+    public String getSessionId() { return sessionId; }
+    public void setSessionId(String sessionId) { this.sessionId = sessionId; }
+}

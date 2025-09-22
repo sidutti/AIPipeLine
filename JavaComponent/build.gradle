@@ -32,8 +32,6 @@ dependencies {
     implementation 'org.springframework.ai:spring-ai-client-chat'
     implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
     implementation 'org.springframework.ai:spring-ai-starter-vector-store-elasticsearch'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
-    implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
     implementation("org.springframework.ai:spring-ai-tika-document-reader")
     implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
     implementation 'com.google.cloud:google-cloud-document-ai:latest.release'
