@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'org.graalvm.buildtools.native' version '0.10.6'
+}
+
+group = 'com.siduuti.charlie'
+version = '25.09.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(24)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation(platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}"))
+    implementation(platform("org.springframework.ai:spring-ai-bom:${springAiVersion}"))
+    implementation(platform("com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"))
+
+    implementation('co.elastic.clients:elasticsearch-java:latest.release')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-gemini'
+    //implementation 'org.springframework.ai:spring-ai-starter-model-vertex-ai-embedding'
+    implementation 'org.springframework.ai:spring-ai-client-chat'
+    implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
+    implementation 'org.springframework.ai:spring-ai-starter-vector-store-elasticsearch'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-server-webflux'
+    implementation 'org.springframework.ai:spring-ai-starter-mcp-client-webflux'
+    implementation("org.springframework.ai:spring-ai-tika-document-reader")
+    implementation 'com.google.cloud:spring-cloud-gcp-starter-storage'
+    implementation 'com.google.cloud:google-cloud-document-ai:latest.release'
+    implementation 'com.google.cloud:google-cloud-aiplatform'
+    implementation 'com.google.adk:google-adk:latest.release'
+    implementation("com.azure:azure-ai-documentintelligence:latest.release")
+    implementation 'com.azure:azure-identity:latest.release'
+    implementation ("org.apache.commons:commons-text:latest.release")
+    implementation 'com.vladsch.flexmark:flexmark-html2md-converter:latest.release'
+    implementation 'com.vladsch.flexmark:flexmark:latest.release'
+    implementation("io.projectreactor.addons:reactor-extra")
+    
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
