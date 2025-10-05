@@ -25,8 +25,6 @@ interface ParameterConfig {
 }
 
 const ProcessingStep: React.FC<ProcessingStepProps> = ({ config, updateConfig }) => {
-  const [selectedProcessors, setSelectedProcessors] = useState<string[]>(config.processors || []);
-
   const processingOptions: ProcessingOption[] = [
     {
       id: 'text-extraction',
@@ -37,17 +35,6 @@ const ProcessingStep: React.FC<ProcessingStepProps> = ({ config, updateConfig })
         extractTables: { type: 'boolean', label: 'Extract tables', default: true },
         ocrEnabled: { type: 'boolean', label: 'Enable OCR for images', default: false },
         language: { type: 'select', label: 'Language', options: ['auto', 'en', 'es', 'fr', 'de', 'zh'], default: 'auto' }
-      }
-    },
-    {
-      id: 'content-cleaning',
-      name: 'Content Cleaning',
-      description: 'Clean and normalize extracted content',
-      parameters: {
-        removeExtraWhitespace: { type: 'boolean', label: 'Remove extra whitespace', default: true },
-        normalizeLineBreaks: { type: 'boolean', label: 'Normalize line breaks', default: true },
-        removeSpecialChars: { type: 'boolean', label: 'Remove special characters', default: false },
-        minContentLength: { type: 'number', label: 'Minimum content length', default: 10, min: 1 }
       }
     },
     {
@@ -62,25 +49,6 @@ const ProcessingStep: React.FC<ProcessingStepProps> = ({ config, updateConfig })
       }
     },
     {
-      id: 'language-detection',
-      name: 'Language Detection',
-      description: 'Detect the language of the content',
-      parameters: {
-        confidence: { type: 'number', label: 'Confidence threshold', default: 0.8, min: 0.1, max: 1.0, step: 0.1 },
-        fallbackLanguage: { type: 'select', label: 'Fallback language', options: ['en', 'es', 'fr', 'de', 'zh'], default: 'en' }
-      }
-    },
-    {
-      id: 'content-classification',
-      name: 'Content Classification',
-      description: 'Classify content by type or category',
-      parameters: {
-        classificationModel: { type: 'select', label: 'Classification model', options: ['default', 'custom', 'industry-specific'], default: 'default' },
-        confidenceThreshold: { type: 'number', label: 'Confidence threshold', default: 0.7, min: 0.1, max: 1.0, step: 0.1 },
-        maxCategories: { type: 'number', label: 'Max categories', default: 3, min: 1, max: 10 }
-      }
-    },
-    {
       id: 'entity-extraction',
       name: 'Entity Extraction',
       description: 'Extract named entities from content',
@@ -92,16 +60,11 @@ const ProcessingStep: React.FC<ProcessingStepProps> = ({ config, updateConfig })
         customEntityTypes: { type: 'text', label: 'Custom entity types (comma-separated)', default: '' }
       }
     },
-    {
-      id: 'sentiment-analysis',
-      name: 'Sentiment Analysis',
-      description: 'Analyze sentiment of the content',
-      parameters: {
-        granularity: { type: 'select', label: 'Analysis granularity', options: ['document', 'paragraph', 'sentence'], default: 'document' },
-        includeEmotions: { type: 'boolean', label: 'Include emotion analysis', default: false }
-      }
-    }
   ];
+
+  const [selectedProcessors, setSelectedProcessors] = useState<string[]>(
+    (config.processors || []).filter(id => processingOptions.some(p => p.id === id))
+  );
 
   const handleProcessorToggle = (processorId: string): void => {
     const isCurrentlySelected = selectedProcessors.includes(processorId);

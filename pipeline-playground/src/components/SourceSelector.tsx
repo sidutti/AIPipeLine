@@ -173,54 +173,30 @@ const SourceSelector: React.FC<SourceSelectorProps> = ({ config, updateConfig })
         return (
           <div className="parameter-fields">
             <div className="form-group">
-              <label htmlFor="ecm-system">ECM System</label>
-              <select
-                id="ecm-system"
-                value={config.parameters.system || ''}
-                onChange={(e) => handleParameterChange('system', e.target.value)}
-                className="form-select"
-              >
-                <option value="">Select ECM system</option>
-                <option value="sharepoint">SharePoint</option>
-                <option value="documentum">EMC Documentum</option>
-                <option value="filenet">IBM FileNet</option>
-                <option value="alfresco">Alfresco</option>
-                <option value="m-files">M-Files</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="ecm-server">Server URL</label>
+              <label htmlFor="ecm-doc-id">DocID</label>
               <input
                 type="text"
-                id="ecm-server"
-                value={config.parameters.serverUrl || ''}
-                onChange={(e) => handleParameterChange('serverUrl', e.target.value)}
-                placeholder="ECM server URL"
+                id="ecm-doc-id"
+                value={config.parameters.docId || ''}
+                onChange={(e) => handleParameterChange('docId', e.target.value)}
+                placeholder="Enter Document ID"
                 className="form-input"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="ecm-credentials">Credentials</label>
-              <input
-                type="password"
-                id="ecm-credentials"
-                value={config.parameters.credentials || ''}
-                onChange={(e) => handleParameterChange('credentials', e.target.value)}
-                placeholder="Authentication credentials"
-                className="form-input"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="ecm-path">Repository Path</label>
+              <label htmlFor="ecm-repo-id">RepoId</label>
               <input
                 type="text"
-                id="ecm-path"
-                value={config.parameters.repositoryPath || ''}
-                onChange={(e) => handleParameterChange('repositoryPath', e.target.value)}
-                placeholder="/path/to/documents"
+                id="ecm-repo-id"
+                value={config.parameters.repoId || ''}
+                onChange={(e) => handleParameterChange('repoId', e.target.value)}
+                placeholder="Enter Repository ID"
                 className="form-input"
               />
             </div>
+            <span className="help-text">
+              Only DocID and RepoId are required. Connection details are handled by the backend.
+            </span>
           </div>
         );
 

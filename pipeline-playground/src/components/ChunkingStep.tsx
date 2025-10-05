@@ -21,6 +21,11 @@ const ChunkingStep: React.FC<ChunkingStepProps> = ({ config, updateConfig, sourc
         id: 'by-section',
         name: 'By Section',
         description: 'Split content by section boundaries'
+      },
+      {
+        id: 'contextual-chunking',
+        name: 'Contextual Chunking',
+        description: 'Create chunks that include surrounding context for better retrieval'
       }
     ];
 
@@ -50,9 +55,12 @@ const ChunkingStep: React.FC<ChunkingStepProps> = ({ config, updateConfig, sourc
 
   const handleStrategyChange = (strategy: string): void => {
     setChunkingStrategy(strategy);
+    const defaultParams = strategy === 'contextual-chunking'
+      ? { chunkSize: 800, overlap: 200, contextWindow: 1, respectHeadings: true }
+      : { chunkSize: 1000, overlap: 100 };
     updateConfig({
       strategy: strategy,
-      parameters: { chunkSize: 1000, overlap: 100 }
+      parameters: defaultParams
     });
   };
 

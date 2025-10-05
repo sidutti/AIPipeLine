@@ -11,9 +11,9 @@ const ChunkHydrationStep: React.FC<ChunkHydrationStepProps> = ({ config, updateC
 
   const hydrationOptions = [
     {
-      id: 'vector-embeddings',
-      name: 'Vector Embeddings',
-      description: 'Generate vector embeddings for semantic search'
+      id: 'hypothetical-questions',
+      name: 'Hypothetical Questions Embeddings',
+      description: 'Generate embeddings from LLM-generated hypothetical questions (HyDE)'
     },
     {
       id: 'metadata-enrichment',
