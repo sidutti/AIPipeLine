@@ -42,8 +42,6 @@ const ProcessingStep: React.FC<ProcessingStepProps> = ({ config, updateConfig })
       name: 'Metadata Extraction',
       description: 'Extract document metadata and properties',
       parameters: {
-        extractAuthor: { type: 'boolean', label: 'Extract author', default: true },
-        extractCreationDate: { type: 'boolean', label: 'Extract creation date', default: true },
         extractKeywords: { type: 'boolean', label: 'Extract keywords', default: false },
         extractCustomProperties: { type: 'boolean', label: 'Extract custom properties', default: false }
       }
