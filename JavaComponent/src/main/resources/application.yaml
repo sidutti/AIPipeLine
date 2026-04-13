@@ -2,44 +2,14 @@ spring:
   application:
     name: AIAgents
   ai:
-    model:
-      embedding: ollama
     vectorstore:
       elasticsearch:
         dimensions: 1024
         initialize-schema: true
         index-name: policy-ai-index
-    ollama:
-      chat:
-        model: gemma3
-      embedding:
-        model: mxbai-embed-large
-    vertex:
-      ai:
-        gemini:
-          projectId: basicdocumentai
-          location: us-central1
-          credentialsUri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
-#        embedding:
-#          text:
-#            options.model: text-embedding-005
-#            options.task-type: CLUSTERING
-#            options.dimensions: 768
-#          project-id: basicdocumentai
-#          location: us-central1
-#          credentials-uri: file:/mnt/nas/CodeDataset/keys/serviceaccount.json
-
-    #    azure:
-#      openai:
-#        api-key: ${AZURE_OPENAI_KEY:NONE}
-#        endpoint: https://basicai.openai.azure.com/
-#        chat:
-#          options:
-#            deployment-name: Basic-Mini
-
-    chat:
-      client:
-        enabled: false
+    openai:
+      base-url: http://localhost:8080
+      api-key: 'not-used'
   aop:
     proxy-target-class: false
     auto: true
@@ -54,11 +24,11 @@ spring:
     virtual:
       enabled: true
   data:
-#    mongodb:
-#      host: 192.168.1.84
-#      username: mongo
-#      password: Admin
-#      port: 27017
+    #    mongodb:
+    #      host: 192.168.1.84
+    #      username: mongo
+    #      password: Admin
+    #      port: 27017
 
     elasticsearch:
       repositories:

@@ -24,36 +24,91 @@ public class CsvConfig extends DataSourceConfig {
         return "csv";
     }
 
-    public String getFilePath() { return filePath; }
-    public void setFilePath(String filePath) { this.filePath = filePath; }
+    public String getFilePath() {
+        return filePath;
+    }
 
-    public String getDelimiter() { return delimiter; }
-    public void setDelimiter(String delimiter) { this.delimiter = delimiter; }
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
-    public String getQuoteCharacter() { return quoteCharacter; }
-    public void setQuoteCharacter(String quoteCharacter) { this.quoteCharacter = quoteCharacter; }
+    public String getDelimiter() {
+        return delimiter;
+    }
 
-    public String getEscapeCharacter() { return escapeCharacter; }
-    public void setEscapeCharacter(String escapeCharacter) { this.escapeCharacter = escapeCharacter; }
+    public void setDelimiter(String delimiter) {
+        this.delimiter = delimiter;
+    }
 
-    public boolean isHasHeader() { return hasHeader; }
-    public void setHasHeader(boolean hasHeader) { this.hasHeader = hasHeader; }
+    public String getQuoteCharacter() {
+        return quoteCharacter;
+    }
 
-    public List<String> getColumnMappings() { return columnMappings; }
-    public void setColumnMappings(List<String> columnMappings) { this.columnMappings = columnMappings; }
+    public void setQuoteCharacter(String quoteCharacter) {
+        this.quoteCharacter = quoteCharacter;
+    }
 
-    public String getEncoding() { return encoding; }
-    public void setEncoding(String encoding) { this.encoding = encoding; }
+    public String getEscapeCharacter() {
+        return escapeCharacter;
+    }
 
-    public int getSkipLines() { return skipLines; }
-    public void setSkipLines(int skipLines) { this.skipLines = skipLines; }
+    public void setEscapeCharacter(String escapeCharacter) {
+        this.escapeCharacter = escapeCharacter;
+    }
 
-    public int getMaxRecords() { return maxRecords; }
-    public void setMaxRecords(int maxRecords) { this.maxRecords = maxRecords; }
+    public boolean isHasHeader() {
+        return hasHeader;
+    }
 
-    public String getDateFormat() { return dateFormat; }
-    public void setDateFormat(String dateFormat) { this.dateFormat = dateFormat; }
+    public void setHasHeader(boolean hasHeader) {
+        this.hasHeader = hasHeader;
+    }
 
-    public List<String> getRequiredColumns() { return requiredColumns; }
-    public void setRequiredColumns(List<String> requiredColumns) { this.requiredColumns = requiredColumns; }
+    public List<String> getColumnMappings() {
+        return columnMappings;
+    }
+
+    public void setColumnMappings(List<String> columnMappings) {
+        this.columnMappings = columnMappings;
+    }
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
+    }
+
+    public int getSkipLines() {
+        return skipLines;
+    }
+
+    public void setSkipLines(int skipLines) {
+        this.skipLines = skipLines;
+    }
+
+    public int getMaxRecords() {
+        return maxRecords;
+    }
+
+    public void setMaxRecords(int maxRecords) {
+        this.maxRecords = maxRecords;
+    }
+
+    public String getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(String dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public List<String> getRequiredColumns() {
+        return requiredColumns;
+    }
+
+    public void setRequiredColumns(List<String> requiredColumns) {
+        this.requiredColumns = requiredColumns;
+    }
 }

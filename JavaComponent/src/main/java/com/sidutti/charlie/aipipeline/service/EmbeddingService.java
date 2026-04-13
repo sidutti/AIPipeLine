@@ -32,9 +32,9 @@ public class EmbeddingService {
     }
 
     public Flux<DocumentEmbedding> generateEmbedding(TextAndDoc input) {
-        return  Flux.fromIterable(input.docs())
+        return Flux.fromIterable(input.docs())
                 .publishOn(forkJoinScheduler)
-                .map(d->{
+                .map(d -> {
                     String textContent = preprocessText(d.getText());
                     float[] embedding = embeddingModel.embed(textContent);
                     DocumentEmbedding docEmbedding = new DocumentEmbedding();

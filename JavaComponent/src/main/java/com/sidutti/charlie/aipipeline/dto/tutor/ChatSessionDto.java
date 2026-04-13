@@ -15,4 +15,5 @@ public record ChatSessionDto(
         Integer totalQuestions,
         Integer correctAnswers,
         ChatSession.SessionStatus status
-) {}
+) {
+}

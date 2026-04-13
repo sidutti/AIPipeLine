@@ -6,6 +6,8 @@ import reactor.core.publisher.Flux;
 
 public interface ChatSessionRepository extends ReactiveElasticsearchRepository<ChatSession, String> {
     Flux<ChatSession> findByStudentNameOrderByStartTimeDesc(String studentName);
+
     Flux<ChatSession> findByStatus(ChatSession.SessionStatus status);
+
     Flux<ChatSession> findByStudentNameAndStatus(String studentName, ChatSession.SessionStatus status);
 }

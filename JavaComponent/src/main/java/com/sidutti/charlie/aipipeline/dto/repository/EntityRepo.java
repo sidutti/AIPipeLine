@@ -8,7 +8,9 @@ public interface EntityRepo extends ReactiveElasticsearchRepository<Entities, St
 
 
     Flux<Entities> findByDocumentId(String documentId);
+
     Flux<Entities> findBySku(String sku);
+
     Flux<Entities> findByChunkId(String chunkId);
 
 }

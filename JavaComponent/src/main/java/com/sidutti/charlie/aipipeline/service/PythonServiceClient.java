@@ -79,7 +79,8 @@ public class PythonServiceClient {
             @JsonProperty("embedding") float[] embedding,
             @JsonProperty("text_content") String textContent,
             @JsonProperty("file_name") String fileName
-    ) {}
+    ) {
+    }
 
     public record ClusteringRequest(
             @JsonProperty("embeddings") List<EmbeddingData> embeddings,
@@ -87,7 +88,8 @@ public class PythonServiceClient {
             @JsonProperty("algorithm") String algorithm,
             @JsonProperty("batch_size") Integer batchSize,
             @JsonProperty("input_path") String inputPath
-    ) {}
+    ) {
+    }
 
     public record ClusteringResponse(
             @JsonProperty("clusters") List<Map<String, Object>> clusters,
@@ -95,17 +97,20 @@ public class PythonServiceClient {
             @JsonProperty("num_clusters") Integer numClusters,
             @JsonProperty("algorithm") String algorithm,
             @JsonProperty("processing_time") Double processingTime
-    ) {}
+    ) {
+    }
 
     public record ClassificationRequest(
             @JsonProperty("cluster_id") String clusterId,
             @JsonProperty("document_contents") List<String> documentContents
-    ) {}
+    ) {
+    }
 
     public record ClassificationResponse(
             @JsonProperty("cluster_id") String clusterId,
             @JsonProperty("classification") String classification,
             @JsonProperty("confidence") Double confidence,
             @JsonProperty("keywords") List<String> keywords
-    ) {}
+    ) {
+    }
 }

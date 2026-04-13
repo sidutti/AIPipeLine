@@ -8,15 +8,35 @@ public class CreateSessionRequest {
     private int grade;
     private LocalDateTime timestamp;
 
-    public String getStudentName() { return studentName; }
-    public void setStudentName(String studentName) { this.studentName = studentName; }
+    public String getStudentName() {
+        return studentName;
+    }
 
-    public ChatSession.Subject getSubject() { return subject; }
-    public void setSubject(ChatSession.Subject subject) { this.subject = subject; }
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 
-    public int getGrade() { return grade; }
-    public void setGrade(int grade) { this.grade = grade; }
+    public ChatSession.Subject getSubject() {
+        return subject;
+    }
 
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public void setTimestamp(LocalDateTime timestamp) { this.timestamp = timestamp; }
+    public void setSubject(ChatSession.Subject subject) {
+        this.subject = subject;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }

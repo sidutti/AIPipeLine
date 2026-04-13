@@ -7,11 +7,22 @@ public class UiChunkHydrationConfig {
     private List<String> hydrators;
     private Map<String, Map<String, Object>> parameters;
 
-    public UiChunkHydrationConfig() {}
+    public UiChunkHydrationConfig() {
+    }
 
-    public List<String> getHydrators() { return hydrators; }
-    public void setHydrators(List<String> hydrators) { this.hydrators = hydrators; }
+    public List<String> getHydrators() {
+        return hydrators;
+    }
 
-    public Map<String, Map<String, Object>> getParameters() { return parameters; }
-    public void setParameters(Map<String, Map<String, Object>> parameters) { this.parameters = parameters; }
+    public void setHydrators(List<String> hydrators) {
+        this.hydrators = hydrators;
+    }
+
+    public Map<String, Map<String, Object>> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, Map<String, Object>> parameters) {
+        this.parameters = parameters;
+    }
 }

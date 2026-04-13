@@ -11,4 +11,5 @@ public record QuestionResponseDto(
         String explanation,
         int difficulty,
         String topic
-) {}
+) {
+}

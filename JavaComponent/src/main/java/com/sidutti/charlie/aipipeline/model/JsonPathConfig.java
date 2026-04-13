@@ -10,25 +10,56 @@ public class JsonPathConfig {
     private String timestampFormat;
     private boolean flattenArrays;
 
-    public JsonPathConfig() {}
+    public JsonPathConfig() {
+    }
 
-    public String getCorpusTextPath() { return corpusTextPath; }
-    public void setCorpusTextPath(String corpusTextPath) { this.corpusTextPath = corpusTextPath; }
+    public String getCorpusTextPath() {
+        return corpusTextPath;
+    }
 
-    public Map<String, String> getMetadataPaths() { return metadataPaths; }
-    public void setMetadataPaths(Map<String, String> metadataPaths) { this.metadataPaths = metadataPaths; }
+    public void setCorpusTextPath(String corpusTextPath) {
+        this.corpusTextPath = corpusTextPath;
+    }
 
-    public String getIdPath() { return idPath; }
-    public void setIdPath(String idPath) { this.idPath = idPath; }
+    public Map<String, String> getMetadataPaths() {
+        return metadataPaths;
+    }
 
-    public String getTimestampPath() { return timestampPath; }
-    public void setTimestampPath(String timestampPath) { this.timestampPath = timestampPath; }
+    public void setMetadataPaths(Map<String, String> metadataPaths) {
+        this.metadataPaths = metadataPaths;
+    }
 
-    public String getTimestampFormat() { return timestampFormat; }
-    public void setTimestampFormat(String timestampFormat) { this.timestampFormat = timestampFormat; }
+    public String getIdPath() {
+        return idPath;
+    }
 
-    public boolean isFlattenArrays() { return flattenArrays; }
-    public void setFlattenArrays(boolean flattenArrays) { this.flattenArrays = flattenArrays; }
+    public void setIdPath(String idPath) {
+        this.idPath = idPath;
+    }
+
+    public String getTimestampPath() {
+        return timestampPath;
+    }
+
+    public void setTimestampPath(String timestampPath) {
+        this.timestampPath = timestampPath;
+    }
+
+    public String getTimestampFormat() {
+        return timestampFormat;
+    }
+
+    public void setTimestampFormat(String timestampFormat) {
+        this.timestampFormat = timestampFormat;
+    }
+
+    public boolean isFlattenArrays() {
+        return flattenArrays;
+    }
+
+    public void setFlattenArrays(boolean flattenArrays) {
+        this.flattenArrays = flattenArrays;
+    }
 
     @Override
     public String toString() {

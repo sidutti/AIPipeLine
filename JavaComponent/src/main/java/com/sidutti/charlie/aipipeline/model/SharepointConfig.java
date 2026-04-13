@@ -23,33 +23,83 @@ public class SharepointConfig extends DataSourceConfig {
         return "sharepoint";
     }
 
-    public String getSiteUrl() { return siteUrl; }
-    public void setSiteUrl(String siteUrl) { this.siteUrl = siteUrl; }
+    public String getSiteUrl() {
+        return siteUrl;
+    }
 
-    public String getTenantId() { return tenantId; }
-    public void setTenantId(String tenantId) { this.tenantId = tenantId; }
+    public void setSiteUrl(String siteUrl) {
+        this.siteUrl = siteUrl;
+    }
 
-    public String getClientId() { return clientId; }
-    public void setClientId(String clientId) { this.clientId = clientId; }
+    public String getTenantId() {
+        return tenantId;
+    }
 
-    public String getClientSecret() { return clientSecret; }
-    public void setClientSecret(String clientSecret) { this.clientSecret = clientSecret; }
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 
-    public List<String> getLibraryNames() { return libraryNames; }
-    public void setLibraryNames(List<String> libraryNames) { this.libraryNames = libraryNames; }
+    public String getClientId() {
+        return clientId;
+    }
 
-    public List<String> getFolderPaths() { return folderPaths; }
-    public void setFolderPaths(List<String> folderPaths) { this.folderPaths = folderPaths; }
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
+    }
 
-    public List<String> getFileTypes() { return fileTypes; }
-    public void setFileTypes(List<String> fileTypes) { this.fileTypes = fileTypes; }
+    public String getClientSecret() {
+        return clientSecret;
+    }
 
-    public boolean isIncludeMetadata() { return includeMetadata; }
-    public void setIncludeMetadata(boolean includeMetadata) { this.includeMetadata = includeMetadata; }
+    public void setClientSecret(String clientSecret) {
+        this.clientSecret = clientSecret;
+    }
 
-    public boolean isIncludeVersionHistory() { return includeVersionHistory; }
-    public void setIncludeVersionHistory(boolean includeVersionHistory) { this.includeVersionHistory = includeVersionHistory; }
+    public List<String> getLibraryNames() {
+        return libraryNames;
+    }
 
-    public String getLastModifiedFilter() { return lastModifiedFilter; }
-    public void setLastModifiedFilter(String lastModifiedFilter) { this.lastModifiedFilter = lastModifiedFilter; }
+    public void setLibraryNames(List<String> libraryNames) {
+        this.libraryNames = libraryNames;
+    }
+
+    public List<String> getFolderPaths() {
+        return folderPaths;
+    }
+
+    public void setFolderPaths(List<String> folderPaths) {
+        this.folderPaths = folderPaths;
+    }
+
+    public List<String> getFileTypes() {
+        return fileTypes;
+    }
+
+    public void setFileTypes(List<String> fileTypes) {
+        this.fileTypes = fileTypes;
+    }
+
+    public boolean isIncludeMetadata() {
+        return includeMetadata;
+    }
+
+    public void setIncludeMetadata(boolean includeMetadata) {
+        this.includeMetadata = includeMetadata;
+    }
+
+    public boolean isIncludeVersionHistory() {
+        return includeVersionHistory;
+    }
+
+    public void setIncludeVersionHistory(boolean includeVersionHistory) {
+        this.includeVersionHistory = includeVersionHistory;
+    }
+
+    public String getLastModifiedFilter() {
+        return lastModifiedFilter;
+    }
+
+    public void setLastModifiedFilter(String lastModifiedFilter) {
+        this.lastModifiedFilter = lastModifiedFilter;
+    }
 }

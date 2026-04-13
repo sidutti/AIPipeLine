@@ -27,45 +27,115 @@ public class WebhookConfig extends DataSourceConfig {
         return "webhook";
     }
 
-    public String getEndpoint() { return endpoint; }
-    public void setEndpoint(String endpoint) { this.endpoint = endpoint; }
+    public String getEndpoint() {
+        return endpoint;
+    }
 
-    public String getHttpMethod() { return httpMethod; }
-    public void setHttpMethod(String httpMethod) { this.httpMethod = httpMethod; }
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
 
-    public Map<String, String> getHeaders() { return headers; }
-    public void setHeaders(Map<String, String> headers) { this.headers = headers; }
+    public String getHttpMethod() {
+        return httpMethod;
+    }
 
-    public String getContentType() { return contentType; }
-    public void setContentType(String contentType) { this.contentType = contentType; }
+    public void setHttpMethod(String httpMethod) {
+        this.httpMethod = httpMethod;
+    }
 
-    public String getAuthType() { return authType; }
-    public void setAuthType(String authType) { this.authType = authType; }
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
 
-    public String getAuthToken() { return authToken; }
-    public void setAuthToken(String authToken) { this.authToken = authToken; }
+    public void setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public String getContentType() {
+        return contentType;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
-    public String getApiKey() { return apiKey; }
-    public void setApiKey(String apiKey) { this.apiKey = apiKey; }
+    public String getAuthType() {
+        return authType;
+    }
 
-    public String getApiKeyHeader() { return apiKeyHeader; }
-    public void setApiKeyHeader(String apiKeyHeader) { this.apiKeyHeader = apiKeyHeader; }
+    public void setAuthType(String authType) {
+        this.authType = authType;
+    }
 
-    public boolean isValidateSsl() { return validateSsl; }
-    public void setValidateSsl(boolean validateSsl) { this.validateSsl = validateSsl; }
+    public String getAuthToken() {
+        return authToken;
+    }
 
-    public int getTimeoutSeconds() { return timeoutSeconds; }
-    public void setTimeoutSeconds(int timeoutSeconds) { this.timeoutSeconds = timeoutSeconds; }
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
+    }
 
-    public int getMaxRetries() { return maxRetries; }
-    public void setMaxRetries(int maxRetries) { this.maxRetries = maxRetries; }
+    public String getUsername() {
+        return username;
+    }
 
-    public JsonPathConfig getJsonPathConfig() { return jsonPathConfig; }
-    public void setJsonPathConfig(JsonPathConfig jsonPathConfig) { this.jsonPathConfig = jsonPathConfig; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getApiKeyHeader() {
+        return apiKeyHeader;
+    }
+
+    public void setApiKeyHeader(String apiKeyHeader) {
+        this.apiKeyHeader = apiKeyHeader;
+    }
+
+    public boolean isValidateSsl() {
+        return validateSsl;
+    }
+
+    public void setValidateSsl(boolean validateSsl) {
+        this.validateSsl = validateSsl;
+    }
+
+    public int getTimeoutSeconds() {
+        return timeoutSeconds;
+    }
+
+    public void setTimeoutSeconds(int timeoutSeconds) {
+        this.timeoutSeconds = timeoutSeconds;
+    }
+
+    public int getMaxRetries() {
+        return maxRetries;
+    }
+
+    public void setMaxRetries(int maxRetries) {
+        this.maxRetries = maxRetries;
+    }
+
+    public JsonPathConfig getJsonPathConfig() {
+        return jsonPathConfig;
+    }
+
+    public void setJsonPathConfig(JsonPathConfig jsonPathConfig) {
+        this.jsonPathConfig = jsonPathConfig;
+    }
 }

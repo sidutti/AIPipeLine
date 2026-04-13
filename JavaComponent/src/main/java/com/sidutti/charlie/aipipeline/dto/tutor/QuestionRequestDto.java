@@ -9,18 +9,43 @@ public class QuestionRequestDto {
     private Integer difficulty;
     private List<String> previousQuestions;
 
-    public String getSessionId() { return sessionId; }
-    public void setSessionId(String sessionId) { this.sessionId = sessionId; }
+    public String getSessionId() {
+        return sessionId;
+    }
 
-    public ChatSession.Subject getSubject() { return subject; }
-    public void setSubject(ChatSession.Subject subject) { this.subject = subject; }
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
-    public int getGrade() { return grade; }
-    public void setGrade(int grade) { this.grade = grade; }
+    public ChatSession.Subject getSubject() {
+        return subject;
+    }
 
-    public Integer getDifficulty() { return difficulty; }
-    public void setDifficulty(Integer difficulty) { this.difficulty = difficulty; }
+    public void setSubject(ChatSession.Subject subject) {
+        this.subject = subject;
+    }
 
-    public List<String> getPreviousQuestions() { return previousQuestions; }
-    public void setPreviousQuestions(List<String> previousQuestions) { this.previousQuestions = previousQuestions; }
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public Integer getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Integer difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public List<String> getPreviousQuestions() {
+        return previousQuestions;
+    }
+
+    public void setPreviousQuestions(List<String> previousQuestions) {
+        this.previousQuestions = previousQuestions;
+    }
 }

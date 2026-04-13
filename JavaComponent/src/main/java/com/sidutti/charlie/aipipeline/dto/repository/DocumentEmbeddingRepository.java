@@ -11,9 +11,9 @@ import java.util.List;
 
 @Repository
 public interface DocumentEmbeddingRepository extends ReactiveElasticsearchRepository<DocumentEmbedding, String> {
-    
+
     Mono<DocumentEmbedding> findByDocumentId(String documentId);
-    
+
     Flux<DocumentEmbedding> findByClusterId(String clusterId);
 
     Mono<Void> deleteByDocumentId(String documentId);

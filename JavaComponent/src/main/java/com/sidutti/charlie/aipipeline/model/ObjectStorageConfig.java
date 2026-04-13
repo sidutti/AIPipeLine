@@ -24,36 +24,91 @@ public class ObjectStorageConfig extends DataSourceConfig {
         return "objectstorage";
     }
 
-    public String getStorageType() { return storageType; }
-    public void setStorageType(String storageType) { this.storageType = storageType; }
+    public String getStorageType() {
+        return storageType;
+    }
 
-    public String getEndpoint() { return endpoint; }
-    public void setEndpoint(String endpoint) { this.endpoint = endpoint; }
+    public void setStorageType(String storageType) {
+        this.storageType = storageType;
+    }
 
-    public String getAccessKey() { return accessKey; }
-    public void setAccessKey(String accessKey) { this.accessKey = accessKey; }
+    public String getEndpoint() {
+        return endpoint;
+    }
 
-    public String getSecretKey() { return secretKey; }
-    public void setSecretKey(String secretKey) { this.secretKey = secretKey; }
+    public void setEndpoint(String endpoint) {
+        this.endpoint = endpoint;
+    }
 
-    public String getBucketName() { return bucketName; }
-    public void setBucketName(String bucketName) { this.bucketName = bucketName; }
+    public String getAccessKey() {
+        return accessKey;
+    }
 
-    public String getRegion() { return region; }
-    public void setRegion(String region) { this.region = region; }
+    public void setAccessKey(String accessKey) {
+        this.accessKey = accessKey;
+    }
 
-    public List<String> getPrefixes() { return prefixes; }
-    public void setPrefixes(List<String> prefixes) { this.prefixes = prefixes; }
+    public String getSecretKey() {
+        return secretKey;
+    }
 
-    public List<String> getFileExtensions() { return fileExtensions; }
-    public void setFileExtensions(List<String> fileExtensions) { this.fileExtensions = fileExtensions; }
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
 
-    public boolean isIncludeMetadata() { return includeMetadata; }
-    public void setIncludeMetadata(boolean includeMetadata) { this.includeMetadata = includeMetadata; }
+    public String getBucketName() {
+        return bucketName;
+    }
 
-    public String getLastModifiedFilter() { return lastModifiedFilter; }
-    public void setLastModifiedFilter(String lastModifiedFilter) { this.lastModifiedFilter = lastModifiedFilter; }
+    public void setBucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
 
-    public long getMaxFileSize() { return maxFileSize; }
-    public void setMaxFileSize(long maxFileSize) { this.maxFileSize = maxFileSize; }
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public List<String> getPrefixes() {
+        return prefixes;
+    }
+
+    public void setPrefixes(List<String> prefixes) {
+        this.prefixes = prefixes;
+    }
+
+    public List<String> getFileExtensions() {
+        return fileExtensions;
+    }
+
+    public void setFileExtensions(List<String> fileExtensions) {
+        this.fileExtensions = fileExtensions;
+    }
+
+    public boolean isIncludeMetadata() {
+        return includeMetadata;
+    }
+
+    public void setIncludeMetadata(boolean includeMetadata) {
+        this.includeMetadata = includeMetadata;
+    }
+
+    public String getLastModifiedFilter() {
+        return lastModifiedFilter;
+    }
+
+    public void setLastModifiedFilter(String lastModifiedFilter) {
+        this.lastModifiedFilter = lastModifiedFilter;
+    }
+
+    public long getMaxFileSize() {
+        return maxFileSize;
+    }
+
+    public void setMaxFileSize(long maxFileSize) {
+        this.maxFileSize = maxFileSize;
+    }
 }

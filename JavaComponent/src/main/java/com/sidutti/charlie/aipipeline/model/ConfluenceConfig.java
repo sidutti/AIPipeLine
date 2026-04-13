@@ -20,24 +20,59 @@ public class ConfluenceConfig extends DataSourceConfig {
         return "confluence";
     }
 
-    public String getBaseUrl() { return baseUrl; }
-    public void setBaseUrl(String baseUrl) { this.baseUrl = baseUrl; }
+    public String getBaseUrl() {
+        return baseUrl;
+    }
 
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
+    public void setBaseUrl(String baseUrl) {
+        this.baseUrl = baseUrl;
+    }
 
-    public String getApiToken() { return apiToken; }
-    public void setApiToken(String apiToken) { this.apiToken = apiToken; }
+    public String getUsername() {
+        return username;
+    }
 
-    public List<String> getSpaceKeys() { return spaceKeys; }
-    public void setSpaceKeys(List<String> spaceKeys) { this.spaceKeys = spaceKeys; }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    public boolean isIncludeAttachments() { return includeAttachments; }
-    public void setIncludeAttachments(boolean includeAttachments) { this.includeAttachments = includeAttachments; }
+    public String getApiToken() {
+        return apiToken;
+    }
 
-    public int getMaxPages() { return maxPages; }
-    public void setMaxPages(int maxPages) { this.maxPages = maxPages; }
+    public void setApiToken(String apiToken) {
+        this.apiToken = apiToken;
+    }
 
-    public String getLastModifiedFilter() { return lastModifiedFilter; }
-    public void setLastModifiedFilter(String lastModifiedFilter) { this.lastModifiedFilter = lastModifiedFilter; }
+    public List<String> getSpaceKeys() {
+        return spaceKeys;
+    }
+
+    public void setSpaceKeys(List<String> spaceKeys) {
+        this.spaceKeys = spaceKeys;
+    }
+
+    public boolean isIncludeAttachments() {
+        return includeAttachments;
+    }
+
+    public void setIncludeAttachments(boolean includeAttachments) {
+        this.includeAttachments = includeAttachments;
+    }
+
+    public int getMaxPages() {
+        return maxPages;
+    }
+
+    public void setMaxPages(int maxPages) {
+        this.maxPages = maxPages;
+    }
+
+    public String getLastModifiedFilter() {
+        return lastModifiedFilter;
+    }
+
+    public void setLastModifiedFilter(String lastModifiedFilter) {
+        this.lastModifiedFilter = lastModifiedFilter;
+    }
 }

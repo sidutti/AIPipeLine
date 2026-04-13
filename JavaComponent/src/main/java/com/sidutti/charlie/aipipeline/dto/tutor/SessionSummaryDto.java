@@ -11,4 +11,5 @@ public record SessionSummaryDto(
         List<String> strengths,
         List<String> weaknesses,
         List<String> recommendations
-) {}
+) {
+}

@@ -25,10 +25,21 @@ public class HtmlChunker {
             this.size = content.length();
         }
 
-        public String getContent() { return content; }
-        public String getHeading() { return heading; }
-        public int getLevel() { return level; }
-        public int getSize() { return size; }
+        public String getContent() {
+            return content;
+        }
+
+        public String getHeading() {
+            return heading;
+        }
+
+        public int getLevel() {
+            return level;
+        }
+
+        public int getSize() {
+            return size;
+        }
 
         @Override
         public String toString() {
@@ -62,7 +73,7 @@ public class HtmlChunker {
         List<Element> elements = new ArrayList<>();
         Element current = h1;
 
-        while (current != null && (nextH1 == null || !current.equals(nextH1))) {
+        while (current != null && (!current.equals(nextH1))) {
             elements.add(current);
             current = current.nextElementSibling();
         }
@@ -99,7 +110,7 @@ public class HtmlChunker {
             subContent.append(subHeading.text()).append("\n");
 
             Element current = subHeading.nextElementSibling();
-            while (current != null && (nextSubHeading == null || !current.equals(nextSubHeading))) {
+            while (current != null && (!current.equals(nextSubHeading))) {
                 if (!isSubHeading(current)) {
                     subContent.append(current.text()).append("\n");
                 }
@@ -135,7 +146,7 @@ public class HtmlChunker {
             if (currentChunk.length() + sentence.length() + 1 > maxSize) {
                 if (currentChunk.length() > 0) {
                     chunks.add(new Chunk(currentChunk.toString().trim(),
-                                       "Chunk " + chunkNumber++, 0));
+                            "Chunk " + chunkNumber++, 0));
                     currentChunk = new StringBuilder();
                 }
             }
@@ -148,7 +159,7 @@ public class HtmlChunker {
 
         if (currentChunk.length() > 0) {
             chunks.add(new Chunk(currentChunk.toString().trim(),
-                               "Chunk " + chunkNumber, 0));
+                    "Chunk " + chunkNumber, 0));
         }
 
         return chunks;
@@ -164,7 +175,7 @@ public class HtmlChunker {
             String content = element.text();
             if (!content.trim().isEmpty()) {
                 chunks.add(new Chunk(content,
-                                   elementSelector + " " + index++, 0));
+                        elementSelector + " " + index++, 0));
             }
         }
 

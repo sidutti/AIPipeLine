@@ -7,4 +7,5 @@ public record AnswerResponseDto(
         int score,
         String feedback,
         boolean nextQuestionAvailable
-) {}
+) {
+}

@@ -6,5 +6,6 @@ import reactor.core.publisher.Flux;
 
 public interface ChatMessageRepository extends ReactiveElasticsearchRepository<ChatMessage, String> {
     Flux<ChatMessage> findBySessionIdOrderByTimestampAsc(String sessionId);
+
     Flux<ChatMessage> findBySessionIdAndIsUserOrderByTimestampAsc(String sessionId, boolean isUser);
 }

@@ -15,7 +15,6 @@ import com.sidutti.charlie.aipipeline.dto.tutor.repository.ChatMessageRepository
 import com.sidutti.charlie.aipipeline.dto.tutor.repository.ChatSessionRepository;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -25,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class TutorService {
@@ -39,8 +36,8 @@ public class TutorService {
 
     public TutorService(ChatSessionRepository sessionRepository,
                         ChatMessageRepository messageRepository,
-                        @Qualifier("ollamaChatClient") ChatClient ollamaClient,
-                        @Qualifier("ollamaChatModel") ChatModel chatModel,
+                        ChatClient ollamaClient,
+                        ChatModel chatModel,
                         ObjectMapper objectMapper) {
         this.sessionRepository = sessionRepository;
         this.messageRepository = messageRepository;
@@ -332,8 +329,6 @@ public class TutorService {
             );
         };
     }
-
-
 
 
     private ChatSessionDto toDto(ChatSession session) {

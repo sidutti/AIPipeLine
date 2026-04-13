@@ -28,45 +28,115 @@ public class KafkaConfig extends DataSourceConfig {
         return "kafka";
     }
 
-    public List<String> getBootstrapServers() { return bootstrapServers; }
-    public void setBootstrapServers(List<String> bootstrapServers) { this.bootstrapServers = bootstrapServers; }
+    public List<String> getBootstrapServers() {
+        return bootstrapServers;
+    }
 
-    public String getTopicName() { return topicName; }
-    public void setTopicName(String topicName) { this.topicName = topicName; }
+    public void setBootstrapServers(List<String> bootstrapServers) {
+        this.bootstrapServers = bootstrapServers;
+    }
 
-    public String getConsumerGroupId() { return consumerGroupId; }
-    public void setConsumerGroupId(String consumerGroupId) { this.consumerGroupId = consumerGroupId; }
+    public String getTopicName() {
+        return topicName;
+    }
 
-    public String getOffsetReset() { return offsetReset; }
-    public void setOffsetReset(String offsetReset) { this.offsetReset = offsetReset; }
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
 
-    public String getKeyDeserializer() { return keyDeserializer; }
-    public void setKeyDeserializer(String keyDeserializer) { this.keyDeserializer = keyDeserializer; }
+    public String getConsumerGroupId() {
+        return consumerGroupId;
+    }
 
-    public String getValueDeserializer() { return valueDeserializer; }
-    public void setValueDeserializer(String valueDeserializer) { this.valueDeserializer = valueDeserializer; }
+    public void setConsumerGroupId(String consumerGroupId) {
+        this.consumerGroupId = consumerGroupId;
+    }
 
-    public Map<String, String> getAdditionalProperties() { return additionalProperties; }
-    public void setAdditionalProperties(Map<String, String> additionalProperties) { this.additionalProperties = additionalProperties; }
+    public String getOffsetReset() {
+        return offsetReset;
+    }
 
-    public boolean isEnableAutoCommit() { return enableAutoCommit; }
-    public void setEnableAutoCommit(boolean enableAutoCommit) { this.enableAutoCommit = enableAutoCommit; }
+    public void setOffsetReset(String offsetReset) {
+        this.offsetReset = offsetReset;
+    }
 
-    public int getAutoCommitInterval() { return autoCommitInterval; }
-    public void setAutoCommitInterval(int autoCommitInterval) { this.autoCommitInterval = autoCommitInterval; }
+    public String getKeyDeserializer() {
+        return keyDeserializer;
+    }
 
-    public int getSessionTimeout() { return sessionTimeout; }
-    public void setSessionTimeout(int sessionTimeout) { this.sessionTimeout = sessionTimeout; }
+    public void setKeyDeserializer(String keyDeserializer) {
+        this.keyDeserializer = keyDeserializer;
+    }
 
-    public String getSecurityProtocol() { return securityProtocol; }
-    public void setSecurityProtocol(String securityProtocol) { this.securityProtocol = securityProtocol; }
+    public String getValueDeserializer() {
+        return valueDeserializer;
+    }
 
-    public String getSaslMechanism() { return saslMechanism; }
-    public void setSaslMechanism(String saslMechanism) { this.saslMechanism = saslMechanism; }
+    public void setValueDeserializer(String valueDeserializer) {
+        this.valueDeserializer = valueDeserializer;
+    }
 
-    public String getSaslUsername() { return saslUsername; }
-    public void setSaslUsername(String saslUsername) { this.saslUsername = saslUsername; }
+    public Map<String, String> getAdditionalProperties() {
+        return additionalProperties;
+    }
 
-    public String getSaslPassword() { return saslPassword; }
-    public void setSaslPassword(String saslPassword) { this.saslPassword = saslPassword; }
+    public void setAdditionalProperties(Map<String, String> additionalProperties) {
+        this.additionalProperties = additionalProperties;
+    }
+
+    public boolean isEnableAutoCommit() {
+        return enableAutoCommit;
+    }
+
+    public void setEnableAutoCommit(boolean enableAutoCommit) {
+        this.enableAutoCommit = enableAutoCommit;
+    }
+
+    public int getAutoCommitInterval() {
+        return autoCommitInterval;
+    }
+
+    public void setAutoCommitInterval(int autoCommitInterval) {
+        this.autoCommitInterval = autoCommitInterval;
+    }
+
+    public int getSessionTimeout() {
+        return sessionTimeout;
+    }
+
+    public void setSessionTimeout(int sessionTimeout) {
+        this.sessionTimeout = sessionTimeout;
+    }
+
+    public String getSecurityProtocol() {
+        return securityProtocol;
+    }
+
+    public void setSecurityProtocol(String securityProtocol) {
+        this.securityProtocol = securityProtocol;
+    }
+
+    public String getSaslMechanism() {
+        return saslMechanism;
+    }
+
+    public void setSaslMechanism(String saslMechanism) {
+        this.saslMechanism = saslMechanism;
+    }
+
+    public String getSaslUsername() {
+        return saslUsername;
+    }
+
+    public void setSaslUsername(String saslUsername) {
+        this.saslUsername = saslUsername;
+    }
+
+    public String getSaslPassword() {
+        return saslPassword;
+    }
+
+    public void setSaslPassword(String saslPassword) {
+        this.saslPassword = saslPassword;
+    }
 }

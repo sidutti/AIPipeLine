@@ -79,7 +79,7 @@ public class DocumentIngestionService {
             List<Document> chunkedDocs = tokenTextSplitter.apply(sourceDocs);
             TargetDocument targetDocument = createTargetDocuments(filePath, fileName, file);
             return documentRepository.save(targetDocument)
-                    .thenReturn(new TextAndDoc(targetDocument,chunkedDocs));
+                    .thenReturn(new TextAndDoc(targetDocument, chunkedDocs));
         } catch (Exception e) {
             e.printStackTrace();
         }

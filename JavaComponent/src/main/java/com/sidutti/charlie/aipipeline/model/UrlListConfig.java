@@ -24,33 +24,83 @@ public class UrlListConfig extends DataSourceConfig {
         return "urllist";
     }
 
-    public List<String> getUrls() { return urls; }
-    public void setUrls(List<String> urls) { this.urls = urls; }
+    public List<String> getUrls() {
+        return urls;
+    }
 
-    public int getCrawlDepth() { return crawlDepth; }
-    public void setCrawlDepth(int crawlDepth) { this.crawlDepth = crawlDepth; }
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
+    }
 
-    public boolean isFollowExternalLinks() { return followExternalLinks; }
-    public void setFollowExternalLinks(boolean followExternalLinks) { this.followExternalLinks = followExternalLinks; }
+    public int getCrawlDepth() {
+        return crawlDepth;
+    }
 
-    public List<String> getAllowedDomains() { return allowedDomains; }
-    public void setAllowedDomains(List<String> allowedDomains) { this.allowedDomains = allowedDomains; }
+    public void setCrawlDepth(int crawlDepth) {
+        this.crawlDepth = crawlDepth;
+    }
 
-    public List<String> getExcludePatterns() { return excludePatterns; }
-    public void setExcludePatterns(List<String> excludePatterns) { this.excludePatterns = excludePatterns; }
+    public boolean isFollowExternalLinks() {
+        return followExternalLinks;
+    }
 
-    public Map<String, String> getHeaders() { return headers; }
-    public void setHeaders(Map<String, String> headers) { this.headers = headers; }
+    public void setFollowExternalLinks(boolean followExternalLinks) {
+        this.followExternalLinks = followExternalLinks;
+    }
 
-    public String getUserAgent() { return userAgent; }
-    public void setUserAgent(String userAgent) { this.userAgent = userAgent; }
+    public List<String> getAllowedDomains() {
+        return allowedDomains;
+    }
 
-    public int getRequestDelay() { return requestDelay; }
-    public void setRequestDelay(int requestDelay) { this.requestDelay = requestDelay; }
+    public void setAllowedDomains(List<String> allowedDomains) {
+        this.allowedDomains = allowedDomains;
+    }
 
-    public int getMaxPages() { return maxPages; }
-    public void setMaxPages(int maxPages) { this.maxPages = maxPages; }
+    public List<String> getExcludePatterns() {
+        return excludePatterns;
+    }
 
-    public boolean isRespectRobotsTxt() { return respectRobotsTxt; }
-    public void setRespectRobotsTxt(boolean respectRobotsTxt) { this.respectRobotsTxt = respectRobotsTxt; }
+    public void setExcludePatterns(List<String> excludePatterns) {
+        this.excludePatterns = excludePatterns;
+    }
+
+    public Map<String, String> getHeaders() {
+        return headers;
+    }
+
+    public void setHeaders(Map<String, String> headers) {
+        this.headers = headers;
+    }
+
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
+    public int getRequestDelay() {
+        return requestDelay;
+    }
+
+    public void setRequestDelay(int requestDelay) {
+        this.requestDelay = requestDelay;
+    }
+
+    public int getMaxPages() {
+        return maxPages;
+    }
+
+    public void setMaxPages(int maxPages) {
+        this.maxPages = maxPages;
+    }
+
+    public boolean isRespectRobotsTxt() {
+        return respectRobotsTxt;
+    }
+
+    public void setRespectRobotsTxt(boolean respectRobotsTxt) {
+        this.respectRobotsTxt = respectRobotsTxt;
+    }
 }

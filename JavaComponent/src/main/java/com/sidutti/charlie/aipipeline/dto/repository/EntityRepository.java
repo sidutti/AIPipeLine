@@ -10,6 +10,4 @@ public interface EntityRepository extends ReactiveElasticsearchRepository<Entity
     Flux<EntityNode> findByDomain(String domain);
 
 
-
-
 }

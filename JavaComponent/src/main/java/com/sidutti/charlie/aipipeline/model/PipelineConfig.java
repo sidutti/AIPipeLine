@@ -17,17 +17,37 @@ public class PipelineConfig {
         this.configurationId = configurationId;
     }
 
-    public DataSourceConfig getSource() { return source; }
-    public void setSource(DataSourceConfig source) { this.source = source; }
+    public DataSourceConfig getSource() {
+        return source;
+    }
 
-    public TargetConfig getTarget() { return target; }
-    public void setTarget(TargetConfig target) { this.target = target; }
+    public void setSource(DataSourceConfig source) {
+        this.source = source;
+    }
 
-    public String getConfigurationId() { return configurationId; }
-    public void setConfigurationId(String configurationId) { this.configurationId = configurationId; }
+    public TargetConfig getTarget() {
+        return target;
+    }
 
-    public long getCreatedTimestamp() { return createdTimestamp; }
-    public void setCreatedTimestamp(long createdTimestamp) { this.createdTimestamp = createdTimestamp; }
+    public void setTarget(TargetConfig target) {
+        this.target = target;
+    }
+
+    public String getConfigurationId() {
+        return configurationId;
+    }
+
+    public void setConfigurationId(String configurationId) {
+        this.configurationId = configurationId;
+    }
+
+    public long getCreatedTimestamp() {
+        return createdTimestamp;
+    }
+
+    public void setCreatedTimestamp(long createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
+    }
 
     @Override
     public String toString() {
