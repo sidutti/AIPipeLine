@@ -6,7 +6,6 @@ import com.sidutti.charlie.aipipeline.dto.TextAndDoc;
 import com.sidutti.charlie.aipipeline.dto.repository.DocumentEmbeddingRepository;
 import com.sidutti.charlie.aipipeline.dto.repository.DocumentRepository;
 import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -23,7 +22,7 @@ public class EmbeddingService {
 
     public EmbeddingService(DocumentRepository documentRepository,
                             DocumentEmbeddingRepository embeddingRepository,
-                            @Qualifier("ollamaEmbeddingModel") EmbeddingModel embeddingModel,
+                            EmbeddingModel embeddingModel,
                             Scheduler forkJoinScheduler) {
         this.documentRepository = documentRepository;
         this.embeddingRepository = embeddingRepository;

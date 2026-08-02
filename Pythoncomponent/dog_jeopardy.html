@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Jeopardy</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #060ce9;
+            color: #fff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px #000;
+            margin-bottom: 20px;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            width: 95%;
+        }
+        .category {
+            font-weight: bold;
+            font-size: 1.2rem;
+            background-color: #060ce9;
+            border: 2px solid #fff;
+            padding: 15px;
+            text-transform: uppercase;
+        }
+        .card {
+            background-color: #060ce9;
+            border: 2px solid #fff;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ffcc00;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #0a12ff;
+        }
+        .card.disabled {
+            color: #444;
+            border-color: #444;
+            cursor: default;
+            background-color: #03067a;
+        }
+        .card.disabled:hover {
+            transform: none;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 1000;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #question-text {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+        #answer-input {
+            font-size: 1.5rem;
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 20px;
+        }
+        #submit-btn, #close-btn {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #ffcc00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #score-board {
+            margin-top: 30px;
+            font-size: 2rem;
+        }
+        #feedback {
+            font-size: 2rem;
+            margin-top: 20px;
+            min-height: 2.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DOG JEOPARDY</h1>
+
+    <div id="game-board">
+        <!-- Categories -->
+        <div class="category">Breeds</div>
+        <div class="category">Anatomy</div>
+        <div class="category">History</div>
+        <div class="category">Skills</div>
+        <div class="category">Behavior</div>
+
+        <!-- Row of 200s (we'll just use one question per category for a total of 5 as requested) -->
+        <div class="card" data-id="0">200</div>
+        <div class="card" data-id="1">200</div>
+        <div class="card" data-id="2">200</div>
+        <div class="card" data-id="3">200</div>
+        <div class="card" data-id="4">200</div>
+    </div>
+
+    <div id="score-board">Score: $<span id="score">0</span></div>
+
+    <div id="modal">
+        <div id="question-text"></div>
+        <input type="text" id="answer-input" placeholder="What is...">
+        <br>
+        <button id="submit-btn">Submit</button>
+        <div id="feedback"></div>
+        <button id="close-btn" style="display:none; margin-top: 20px;">Next Question</button>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                category: "Breeds",
+                question: "Commonly known as the 'firehouse dog', this breed is famous for its black or liver-colored spots.",
+                answer: "dalmatian",
+                points: 200
+            },
+            {
+                category: "Anatomy",
+                question: "This part of a dog's body is as unique as a human fingerprint and can be used for identification.",
+                answer: "nose",
+                points: 200
+            },
+            {
+                category: "History",
+                question: "In 1957, this Soviet space dog became one of the first animals in space and the first to orbit the Earth.",
+                answer: "laika",
+                points: 200
+            },
+            {
+                category: "Skills",
+                question: "This breed is famous for its incredible sense of smell and is often used for tracking missing persons or fugitives.",
+                answer: "bloodhound",
+                points: 200
+            },
+            {
+                category: "Behavior",
+                question: "When a dog does this with its tail, it usually indicates they are happy or excited.",
+                answer: "wag",
+                points: 200
+            }
+        ];
+
+        let score = 0;
+        let currentQuestion = null;
+        let currentCard = null;
+
+        const cards = document.querySelectorAll('.card');
+        const modal = document.getElementById('modal');
+        const questionText = document.getElementById('question-text');
+        const answerInput = document.getElementById('answer-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const feedback = document.getElementById('feedback');
+        const scoreDisplay = document.getElementById('score');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (card.classList.contains('disabled')) return;
+                
+                const id = card.getAttribute('data-id');
+                currentQuestion = questions[id];
+                currentCard = card;
+
+                questionText.textContent = currentQuestion.question;
+                answerInput.value = '';
+                feedback.textContent = '';
+                submitBtn.style.display = 'inline-block';
+                closeBtn.style.display = 'none';
+                modal.style.display = 'flex';
+                answerInput.focus();
+            });
+        });
+
+        submitBtn.addEventListener('click', checkAnswer);
+        answerInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAnswer();
+        });
+
+        function checkAnswer() {
+            const userAnswer = answerInput.value.toLowerCase().trim();
+            const correctAnswer = currentQuestion.answer.toLowerCase();
+
+            if (userAnswer.includes(correctAnswer)) {
+                feedback.textContent = "CORRECT!";
+                feedback.style.color = "#00ff00";
+                score += currentQuestion.points;
+            } else {
+                feedback.textContent = `INCORRECT! The answer was: What is a ${currentQuestion.answer}?`;
+                feedback.style.color = "#ff0000";
+                score -= currentQuestion.points;
+            }
+
+            scoreDisplay.textContent = score;
+            submitBtn.style.display = 'none';
+            closeBtn.style.display = 'inline-block';
+            currentCard.classList.add('disabled');
+            currentCard.textContent = '';
+        }
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+    </script>
+</body>
+</html>

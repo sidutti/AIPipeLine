@@ -11,9 +11,7 @@ import com.sidutti.charlie.aipipeline.dto.tutor.ChatSessionDto;
 import com.sidutti.charlie.aipipeline.dto.tutor.QuestionRequestDto;
 import com.sidutti.charlie.aipipeline.dto.tutor.QuestionResponseDto;
 import com.sidutti.charlie.aipipeline.dto.tutor.SessionSummaryDto;
-import com.sidutti.charlie.aipipeline.dto.tutor.repository.ChatMessageRepository;
 import com.sidutti.charlie.aipipeline.dto.tutor.repository.ChatSessionRepository;
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -29,19 +27,13 @@ import java.util.UUID;
 public class TutorService {
 
     private final ChatSessionRepository sessionRepository;
-    private final ChatMessageRepository messageRepository;
-    private final ChatClient chatClient;
     private final ChatModel chatModel;
     private final ObjectMapper objectMapper;
 
     public TutorService(ChatSessionRepository sessionRepository,
-                        ChatMessageRepository messageRepository,
-                        ChatClient ollamaClient,
-                        ChatModel chatModel,
-                        ObjectMapper objectMapper) {
+            ChatModel chatModel,
+            ObjectMapper objectMapper) {
         this.sessionRepository = sessionRepository;
-        this.messageRepository = messageRepository;
-        this.chatClient = ollamaClient;
         this.chatModel = chatModel;
         this.objectMapper = objectMapper;
     }
@@ -59,8 +51,7 @@ public class TutorService {
                 null,
                 null,
                 null,
-                ChatSession.SessionStatus.active
-        );
+                ChatSession.SessionStatus.active);
 
         return sessionRepository.save(session)
                 .map(this::toDto);
@@ -80,8 +71,7 @@ public class TutorService {
                             session.score(),
                             session.totalQuestions(),
                             session.correctAnswers(),
-                            ChatSession.SessionStatus.completed
-                    );
+                            ChatSession.SessionStatus.completed);
 
                     return sessionRepository.save(endedSession)
                             .map(this::toSessionSummary);
@@ -102,8 +92,7 @@ public class TutorService {
                             session.score(),
                             session.totalQuestions(),
                             session.correctAnswers(),
-                            ChatSession.SessionStatus.paused
-                    );
+                            ChatSession.SessionStatus.paused);
                     return sessionRepository.save(pausedSession);
                 })
                 .map(session -> true)
@@ -124,8 +113,7 @@ public class TutorService {
                             session.score(),
                             session.totalQuestions(),
                             session.correctAnswers(),
-                            ChatSession.SessionStatus.active
-                    );
+                            ChatSession.SessionStatus.active);
                     return sessionRepository.save(resumedSession);
                 })
                 .map(session -> true)
@@ -159,8 +147,7 @@ public class TutorService {
         String userPrompt = String.format(
                 "Student answered: '%s' for question ID: %s. " +
                         "Provide feedback in JSON format with fields: isCorrect, correctAnswer, explanation, score, feedback, nextQuestionAvailable",
-                request.getUserAnswer(), request.getQuestionId()
-        );
+                request.getUserAnswer(), request.getQuestionId());
 
         return Mono.fromCallable(() -> {
             String response = chatModel.call(systemPrompt + "\n\n" + userPrompt);
@@ -183,10 +170,10 @@ public class TutorService {
         return String.format(
                 "You are an expert %s tutor for grade %d students. " +
                         "Generate educational questions with appropriate difficulty level %s. " +
-                        "Respond in JSON format with fields: question, questionId, questionType, options (if multiple choice), " +
+                        "Respond in JSON format with fields: question, questionId, questionType, options (if multiple choice), "
+                        +
                         "correctAnswer, explanation, difficulty (1-10), topic",
-                subject, grade, difficulty != null ? difficulty : "medium"
-        );
+                subject, grade, difficulty != null ? difficulty : "medium");
     }
 
     private String createQuestionPrompt(List<String> previousQuestions) {
@@ -253,8 +240,7 @@ public class TutorService {
                     correctAnswer,
                     explanation,
                     difficulty,
-                    topic
-            );
+                    topic);
 
         } catch (JsonProcessingException e) {
             // Fallback: generate a simple question if JSON parsing fails
@@ -279,8 +265,7 @@ public class TutorService {
                     explanation,
                     score,
                     feedback,
-                    nextQuestionAvailable
-            );
+                    nextQuestionAvailable);
 
         } catch (JsonProcessingException e) {
             // Fallback response
@@ -290,8 +275,7 @@ public class TutorService {
                     "There was an issue processing your answer. Please try again.",
                     0,
                     "Please try again",
-                    true
-            );
+                    true);
         }
     }
 
@@ -315,8 +299,7 @@ public class TutorService {
                     "120",
                     "Multiply 15 by 8 to get the answer",
                     4,
-                    "Multiplication"
-            );
+                    "Multiplication");
             case physics -> new QuestionResponseDto(
                     "What is the formula for calculating speed?",
                     UUID.randomUUID().toString(),
@@ -325,11 +308,9 @@ public class TutorService {
                     "v = d/t",
                     "Speed is distance divided by time",
                     3,
-                    "Kinematics"
-            );
+                    "Kinematics");
         };
     }
-
 
     private ChatSessionDto toDto(ChatSession session) {
         return new ChatSessionDto(
@@ -343,8 +324,7 @@ public class TutorService {
                 session.score(),
                 session.totalQuestions(),
                 session.correctAnswers(),
-                session.status()
-        );
+                session.status());
     }
 
     private SessionSummaryDto toSessionSummary(ChatSession session) {
@@ -357,7 +337,6 @@ public class TutorService {
                         session.endTime() != null ? session.endTime() : LocalDateTime.now()).toMinutes(),
                 Arrays.asList("Problem solving", "Mathematical reasoning"),
                 Arrays.asList("Speed calculation", "Complex formulas"),
-                Arrays.asList("Practice more word problems", "Review basic concepts")
-        );
+                Arrays.asList("Practice more word problems", "Review basic concepts"));
     }
 }

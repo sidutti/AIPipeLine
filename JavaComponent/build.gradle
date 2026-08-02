@@ -24,7 +24,7 @@ dependencies {
     implementation(platform("com.google.cloud:spring-cloud-gcp-dependencies:${springCloudGcpVersion}"))
 
     implementation('co.elastic.clients:elasticsearch-java:latest.release')
-
+    implementation 'org.springaicommunity:spring-ai-agent-utils:latest.release'
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.ai:spring-ai-starter-model-openai'
@@ -40,7 +40,6 @@ dependencies {
     implementation 'com.vladsch.flexmark:flexmark-html2md-converter:latest.release'
     implementation 'com.vladsch.flexmark:flexmark:latest.release'
     implementation("io.projectreactor.addons:reactor-extra")
-
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'

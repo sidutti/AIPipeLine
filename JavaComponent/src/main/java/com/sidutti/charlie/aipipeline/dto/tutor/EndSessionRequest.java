@@ -1,4 +1,4 @@
-package com.siduuti.charlie.aipipeline.dto.tutor;
+package com.sidutti.charlie.aipipeline.dto.tutor;
 
 public class EndSessionRequest {
     private String sessionId;
